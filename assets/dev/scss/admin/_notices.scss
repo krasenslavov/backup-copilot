@@ -1,0 +1,101 @@
+@use '../base/variables' as *;
+
+// Onboarding Notice
+.bkpc-onboarding-notice {
+	border-left-color: $color-blue !important;
+	padding: 0 20px 20px 20px !important;
+
+	// Responsive
+	@media (max-width: $breakpoint-tablet) {
+		.bkpc-onboarding-content {
+			flex-direction: column;
+		}
+
+		.bkpc-onboarding-list {
+			grid-template-columns: 1fr;
+		}
+
+		.bkpc-onboarding-icon {
+			.dashicons {
+				font-size: 48px;
+				height: 48px;
+				width: 48px;
+			}
+		}
+	}
+
+	.bkpc-onboarding-content {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.bkpc-onboarding-icon {
+		align-items: center;
+		display: flex;
+		gap: 8px;
+
+		.dashicons {
+			color: $color-blue;
+			font-size: 24px;
+			height: 24px;
+			width: 24px;
+		}
+	}
+
+	.bkpc-onboarding-text {
+		flex: 1;
+
+		h3 {
+			color: $color-black;
+			font-size: 20px;
+			margin: 0;
+		}
+
+		p {
+			font-size: 13px;
+			line-height: 1.6;
+			margin: 0 0 16px;
+		}
+	}
+
+	.bkpc-onboarding-list {
+		display: grid;
+		gap: 4px;
+		grid-template-columns: repeat(2, 1fr);
+		list-style: none;
+		margin: 0 0 20px;
+		padding: 0;
+
+		li {
+			align-items: center;
+			display: flex;
+			font-size: 13px;
+			gap: 8px;
+
+			.dashicons {
+				color: $color-success;
+				font-size: 18px;
+				height: 18px;
+				width: 18px;
+			}
+		}
+	}
+
+	.bkpc-onboarding-actions {
+		display: flex;
+		flex-wrap: wrap;
+
+		.button {
+			align-items: center;
+			display: flex;
+			gap: 0.375rem;
+
+			.dashicons {
+				font-size: 18px;
+				height: 18px;
+				width: 18px;
+			}
+		}
+	}
+}

@@ -1,19 +1,35 @@
 <?php
+/**
+ * Backup Copilot - ZIP Archive Handler
+ *
+ * Handles all ZIP archive operations including creating archives
+ * from wp-content directory with selective file inclusion.
+ *
+ * @package    BKPC
+ * @subpackage Backup_Copilot/Core
+ * @author     Krasen Slavov <hello@krasenslavov.com>
+ * @copyright  2025
+ * @license    GPL-2.0-or-later
+ * @link       https://krasenslavov.com/plugins/backup-copilot/
+ * @since      0.1.0
+ */
 
-namespace BKPC\Backup_Copilot;
+namespace BKPC;
 
 ! defined( ABSPATH ) || exit;
 
 if ( ! class_exists( 'BKPC_Zip' ) ) {
 
 	class BKPC_Zip extends Backup_Copilot {
+		private $mu;
+
 		function __construct() {
 			parent::__construct();
 
-			$this->mu = new BKPC_Multisite;
+			$this->mu = new BKPC_Multisite();
 		}
 
-		public function create_zip_archive( $wpc_dir, $zip_filename, $options = [], $backup_dir = false ) {
+		public function create_zip_archive( $wpc_dir, $zip_filename, $options = array(), $backup_dir = false ) {
 			if ( ! is_dir( $wpc_dir ) ) {
 				return false;
 			}
@@ -41,34 +57,52 @@ if ( ! class_exists( 'BKPC_Zip' ) ) {
 					$abs_path      = $file->getRealPath();
 					$relative_path = substr( $abs_path, strlen( $wpc_dir ) );
 
-					// Don't ever include .htaccess and wp-config.php for export
+					// Don't ever include .htaccess and wp-config.php for export.
 					if ( $backup_dir ) {
-						if ( strpos( $abs_path, '.htaccess' ) !== false || strpos( $abs_path, 'wp-config.php' ) !== false ) 
+						if ( false !== strpos( $abs_path, '.htaccess' )
+							|| false !== strpos( $abs_path, 'wp-config.php' ) ) {
 							continue;
+						}
 					}
 
-					if ( strpos( $abs_path, 'themes' ) !== false && ! in_array( 'themes', $options ) ) 
-						continue;
+					// If 'content' is selected, include all wp-content folders.
+					// Otherwise, only include specifically selected folders.
+					if ( ! in_array( 'content', $options, true ) ) {
+						if ( false !== strpos( $abs_path, 'themes' )
+							&& ! in_array( 'themes', $options, true ) ) {
+							continue;
+						}
 
-					if ( strpos( $abs_path, 'plugins' ) !== false && ! in_array( 'plugins', $options ) ) 
-						continue;
+						if ( false !== strpos( $abs_path, 'plugins' )
+							&& ! in_array( 'plugins', $options, true ) ) {
+							continue;
+						}
 
-					if ( strpos( $abs_path, 'mu-plugins' ) !== false && ! in_array( 'mu-plugins', $options ) ) 
-						continue;
+						if ( false !== strpos( $abs_path, 'mu-plugins' )
+							&& ! in_array( 'mu-plugins', $options, true ) ) {
+							continue;
+						}
 
-					if ( strpos( $abs_path, 'uploads' ) !== false && ! in_array( 'uploads', $options ) ) 
-						continue;
+						if ( false !== strpos( $abs_path, 'uploads' )
+							&& ! in_array( 'uploads', $options, true ) ) {
+							continue;
+						}
 
-					if ( strpos( $abs_path, 'backups' ) !== false && ! in_array( 'backups', $options ) ) 
-						continue;
+						if ( false !== strpos( $abs_path, 'backups' )
+							&& ! in_array( 'backups', $options, true ) ) {
+							continue;
+						}
 
-					if ( strpos( $abs_path, 'cache' ) !== false && ! in_array( 'cache', $options ) ) 
-						continue;
+						if ( false !== strpos( $abs_path, 'cache' )
+							&& ! in_array( 'cache', $options, true ) ) {
+							continue;
+						}
+					}
 
 					if ( ! $file->isDir() ) {
 						$zip->addFile( $abs_path, $relative_path );
 					} else {
-						if ( $relative_path !== false ) {
+						if ( false !== $relative_path ) {
 							$zip->addEmptyDir( $relative_path );
 						}
 					}
@@ -77,11 +111,11 @@ if ( ! class_exists( 'BKPC_Zip' ) ) {
 				return $zip->close();
 			}
 
-			// Alt: Create archive under Unix with `zip` command
+			// Alt: Create archive under Unix with `zip` command.
 			exec( 'zip --help', $output );
 
 			if ( $output ) {
-				exec( 'zip -r ' . $zip_filename . ' ' . $wpc_dir, $output );
+				exec( 'zip -r ' . escapeshellarg( $zip_filename ) . ' ' . escapeshellarg( $wpc_dir ), $output );
 
 				if ( $output ) {
 					return true;

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.1\n"
 "Report-Msgid-Bugs-To: Backup Copilot <contact@developry.com>\n"
 "POT-Creation-Date: 2025-11-05 10:03+0200\n"
-"PO-Revision-Date: 2025-11-05 10:03+0200\n"
+"PO-Revision-Date: 2025-11-06 10:03+0200\n"
 "Last-Translator: Krasen Slavov <contact@developry.com>\n"
 "Language-Team: BKPC <contact@developry.com>\n"
 "Language: \n"
@@ -17,3 +17,434 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Eazy Po 1.0.0.0\n"
+
+
+#: class-backup-copilot.php:133
+msgid ""
+"Could you please kindly help the plugin in your turn by giving it 5 stars "
+"rating? (Thank you in advance)"
+msgstr ""
+
+#: class-backup-copilot.php:136
+msgid "Rate Us @ WordPress.org"
+msgstr ""
+
+#: class-backup-copilot.php:137
+msgid "I already did"
+msgstr ""
+
+#: class-backup-copilot.php:138
+msgid "Don't show this notice again!"
+msgstr ""
+
+#: class-backup-copilot.php:178 classes/core/class-bkpc-pointers.php:67
+msgid "Welcome to Backup Copilot!"
+msgstr ""
+
+#: class-backup-copilot.php:181
+msgid ""
+"Thank you for installing Backup Copilot. Get started with these quick "
+"actions:"
+msgstr ""
+
+#: class-backup-copilot.php:183
+msgid "Create your first database backup"
+msgstr ""
+
+#: class-backup-copilot.php:184
+msgid "Restore backups with one click"
+msgstr ""
+
+#: class-backup-copilot.php:185
+msgid "Export backups for safe storage"
+msgstr ""
+
+#: class-backup-copilot.php:186
+msgid "Upload backups from other sites"
+msgstr ""
+
+#: class-backup-copilot.php:191
+msgid "Create First Backup"
+msgstr ""
+
+#: class-backup-copilot.php:195
+msgid "View Documentation"
+msgstr ""
+
+#: class-backup-copilot.php:199
+msgid "Dismiss"
+msgstr ""
+
+#: classes/class-bkpc-init.php:162 classes/class-bkpc-init.php:358
+msgid "Manage Backups"
+msgstr ""
+
+#: classes/class-bkpc-init.php:172
+msgid "Documentation"
+msgstr ""
+
+#: classes/class-bkpc-init.php:207 classes/core/class-bkpc-view.php:39
+msgid "Backup Copilot"
+msgstr ""
+
+#: classes/class-bkpc-init.php:211
+msgid "User can have access to Backup Copilot?"
+msgstr ""
+
+#: classes/class-bkpc-init.php:219
+msgid ""
+"Useful when you want to restrict access to Backup Copilot and have a single "
+"admin-only access."
+msgstr ""
+
+#: classes/class-bkpc-init.php:320
+msgid "Create, restore, and manage your WordPress database backups with ease."
+msgstr ""
+
+#: classes/class-bkpc-init.php:328
+msgid "Total Backup Size"
+msgstr ""
+
+#: classes/class-bkpc-init.php:335
+msgid "Recent Full Backups"
+msgstr ""
+
+#: classes/class-bkpc-init.php:342
+msgid "Latest Backups"
+msgstr ""
+
+#: classes/class-bkpc-init.php:362 classes/core/class-bkpc-view.php:458
+msgid "Support"
+msgstr ""
+
+#: classes/core/class-bkpc-db.php:36
+msgid "Database credentials not loaded"
+msgstr ""
+
+#: classes/core/class-bkpc-db.php:92
+msgid "SQL file was not created or is empty"
+msgstr ""
+
+#: classes/core/class-bkpc-db.php:109
+#, php-format
+msgid "Database backup failed: %s"
+msgstr ""
+
+#: classes/core/class-bkpc-pointers.php:70
+#, php-format
+msgid ""
+"%1$s Click here to create your first database backup, restore previous "
+"backups, or manage all your backup files."
+msgstr ""
+
+#: classes/core/class-bkpc-pointers.php:71
+msgid "Quick Start:"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:43
+msgid ""
+"Quickly and easily create backup points of your WordPress installation to "
+"restore, export, or transfer to another location."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:44
+msgid "Maximum backup size:"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:57
+msgid "Create or export your backup"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:60
+msgid ""
+"Add some notes to describe your backup. Use advanced options to create "
+"custom backups."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:63
+msgid ""
+"* Backup Export will only generate backup for download and doesn't save any "
+"files on your server."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:70
+msgid "Notes..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:74
+msgid "See advanced export options..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:76
+msgid "Advanced Options..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:82 classes/core/class-bkpc-view.php:86
+msgid "Save"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:82 classes/core/class-bkpc-view.php:86
+msgid "file"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:89
+msgid ".htaccess and wp-config.php files can be saved only for Create Export."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:92
+msgid "Find URL..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:93
+msgid "Replace with URL..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:96
+msgid "Find and Replace URL is only used for Backup Export."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:99
+msgid "Find text..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:100
+msgid "Replace with text..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:103
+msgid "Add another find and replace text group..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:105
+msgid "Add Row..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:110 classes/core/class-bkpc-view.php:114
+#: classes/core/class-bkpc-view.php:118 classes/core/class-bkpc-view.php:122
+#: classes/core/class-bkpc-view.php:126 classes/core/class-bkpc-view.php:130
+#: classes/core/class-bkpc-view.php:134 classes/core/class-bkpc-view.php:138
+#: classes/core/class-bkpc-view.php:142 classes/core/class-bkpc-view.php:146
+#: classes/core/class-bkpc-view.php:150 classes/core/class-bkpc-view.php:154
+#: classes/core/class-bkpc-view.php:165
+msgid "Export"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:110
+msgid "spam comments"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:114
+msgid "post revisions"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:118
+msgid "media library"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:122
+msgid "themes"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:126
+msgid "inactive themes"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:130
+msgid "must-use plugins"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:134
+msgid "plugins"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:138
+msgid "inactive plugins"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:142
+msgid "cache"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:146
+msgid "3rd-party backups"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:150
+msgid "database"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:154
+msgid "wp-content"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:161
+msgid "Create"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:175
+msgid "Import your backup"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:178
+msgid "Upload your full backup and have it ready to be restored."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:181
+msgid ""
+"* You can only restore from full backup files. (e.g. file name 1639558327."
+"zip)"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:190
+msgid "Choose Backup File..."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:196
+msgid "Upload"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:206
+msgid "All backups"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:209
+msgid "List with all available backups on your server."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:212
+msgid ""
+"* Hold your mouse over each icon to view full description for the action."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:213
+msgid ""
+"** Backups with delete and download full backup buttons are copies of your "
+"exports you can either delete them or they will be overwritten when/if you "
+"import the same backup."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:220
+msgid "Created"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:221
+msgid "Size"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:222
+msgid "Actions"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:254
+msgid "No backups found!"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:465
+#, php-format
+msgid "Go to your %1$s page and click the %2$s button."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:466
+msgid "Site Health Info"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:467
+msgid "Copy Site Info to Clipboard"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:475
+#, php-format
+msgid ""
+"Go to the Copilot Plus %1$s page and send us a message with the Site Health "
+"Info contents included."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:476
+msgid "Contact Us"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:484
+#, php-format
+msgid ""
+"Or search and create a support ticket at the plugin %1$s page directly at WP."
+"org."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:485
+msgid "Support Tab"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:491
+msgid ""
+"DON'T POST YOUR SITE HEALTH INFO CONTENTS ONTO THE PUBLIC PLUGIN FORUMS!"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:495
+msgid "Configuration"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:500
+msgid "Create archive files."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:505
+msgid "Database constants not defined"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:512
+msgid "Cannot connect to database"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:519
+msgid "Connect to database."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:522
+msgid "Base path permissions."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:525
+msgid "Content path permissions."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:529
+msgid "Maximum upload file size"
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:530
+msgid "Maximum post file size."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:531
+msgid "Memory limit."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:532
+msgid "Maximum execution time."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:533
+msgid "Maximum input time."
+msgstr ""
+
+#: classes/core/class-bkpc-view.php:542
+msgid ""
+"* Server timeout may occur on hosting providers with restrictions (e.g. "
+"WPEngine) and may cause corrupted backup files for sites with data over 1GB."
+msgstr ""
+
+#: classes/events/class-bkpc-create-backup.php:73
+msgid "Security check failed!"
+msgstr ""
+
+#: classes/events/class-bkpc-create-backup.php:78
+msgid "Insufficient permissions!"
+msgstr ""
+
+#: classes/events/class-bkpc-create-backup.php:173
+msgid "New backup point was created successfully!"
+msgstr ""
+
+#: classes/events/class-bkpc-create-backup.php:199
+msgid "New backup point failed! You are over the maximum backup limit size!"
+msgstr ""

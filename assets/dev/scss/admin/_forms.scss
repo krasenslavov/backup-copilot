@@ -1,0 +1,20 @@
+@use '../base/variables' as *;
+
+// Forms
+.bkpc-custom-file-upload {
+	input[type='file'] {
+		display: none;
+	}
+
+	label {
+		background-color: $color-bg-light;
+		border: 1px solid $color-border-dark;
+		border-radius: $border-radius;
+		color: $color-black;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 14px;
+		padding: 5px 10px;
+		width: calc(100% - 20px);
+	}
+}

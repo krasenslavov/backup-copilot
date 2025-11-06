@@ -1,0 +1,140 @@
+@use '../base/variables' as *;
+
+// Dashboard Widget
+.bkpc-dashboard-widget {
+	.bkpc-widget-summary {
+		border-bottom: 1px solid $color-border;
+		margin-bottom: 16px;
+		padding-bottom: 16px;
+
+		p {
+			line-height: 1.5;
+			margin: 0;
+		}
+
+		strong {
+			font-size: 14px;
+		}
+	}
+
+	.bkpc-widget-stats {
+		border-bottom: 1px solid $color-border;
+		display: flex;
+		gap: 16px;
+		margin-bottom: 16px;
+		padding-bottom: 16px;
+
+		.bkpc-stat-item {
+			align-items: center;
+			display: flex;
+			flex: 1;
+			gap: 8px;
+
+			.dashicons {
+				color: $color-blue;
+				font-size: 32px;
+				height: 32px;
+				width: 32px;
+			}
+
+			div {
+				display: flex;
+				flex-direction: column;
+			}
+
+			strong {
+				font-size: 18px;
+				line-height: 1.2;
+			}
+
+			small {
+				font-size: 11px;
+				letter-spacing: 0.5px;
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	.bkpc-widget-backups {
+		margin-bottom: 16px;
+
+		h4 {
+			font-size: 12px !important;
+			font-weight: 600 !important;
+			margin: 0 0 8px;
+			text-transform: uppercase;
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				align-items: center;
+				background-color: $color-bg-light;
+				border-bottom: 1px solid $color-border;
+				display: flex;
+				gap: 8px;
+				justify-content: space-between;
+				margin-bottom: 1px;
+				padding: 8px;
+				text-align: left;
+
+				&:last-child {
+					border-bottom: 0;
+				}
+
+				.dashicons {
+					color: $color-success;
+					font-size: 16px;
+					height: 16px;
+					width: 16px;
+				}
+
+				span {
+					font-weight: 600;
+				}
+
+				small {
+					font-size: 11px;
+				}
+			}
+		}
+	}
+
+	.bkpc-widget-actions {
+		display: flex;
+		gap: 8px;
+		justify-content: space-between;
+		margin-top: 16px;
+
+		.button {
+			align-items: center;
+			display: flex;
+			flex: 1;
+			gap: 4px;
+			justify-content: center;
+			max-width: 140px;
+
+			.dashicons {
+				font-size: 16px;
+				height: 16px;
+				width: 16px;
+			}
+		}
+	}
+}
+
+// Dashboard widget title icon
+#bkpc_dashboard_widget {
+	h2 {
+		align-items: center;
+		display: flex;
+		gap: 8px;
+
+		.dashicons {
+			color: $color-blue;
+		}
+	}
+}

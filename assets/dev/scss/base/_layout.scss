@@ -1,0 +1,34 @@
+@use './variables' as *;
+
+// Layout & Containers
+.bkpc-container {
+	align-items: flex-start;
+	display: flex;
+	flex: 0 0 100%;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+
+	@media (max-width: $breakpoint-tablet) {
+		display: block;
+	}
+}
+
+.bkpc-inner-container {
+	background-color: $color-white;
+	border: 1px solid $color-border;
+	border-radius: $border-radius;
+	box-shadow: 0 4px 2px -2px $color-shadow;
+	margin: 10px 0;
+	min-width: 800px;
+	padding: 10px;
+
+	table,
+	input[type='text'],
+	input[type='file'] {
+		width: 100%;
+	}
+}
+
+.bkpc-footer {
+	width: 100%;
+}

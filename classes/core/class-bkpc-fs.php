@@ -1,6 +1,20 @@
 <?php
+/**
+ * Backup Copilot - File System Handler
+ *
+ * Handles all file system operations including file creation,
+ * copying, removal, and directory management.
+ *
+ * @package    BKPC
+ * @subpackage Backup_Copilot/Core
+ * @author     Krasen Slavov <hello@krasenslavov.com>
+ * @copyright  2025
+ * @license    GPL-2.0-or-later
+ * @link       https://krasenslavov.com/plugins/backup-copilot/
+ * @since      0.1.0
+ */
 
-namespace BKPC\Backup_Copilot;
+namespace BKPC;
 
 ! defined( ABSPATH ) || exit;
 
@@ -25,7 +39,7 @@ if ( ! class_exists( 'BKPC_FS' ) ) {
 		}
 
 		public function create_file( $path, $content, $flags = false ) {
-			if ( file_exists( $path ) && $flags === 0 ) {
+			if ( file_exists( $path ) && 0 === $flags ) {
 				return false;
 			}
 
@@ -44,7 +58,7 @@ if ( ! class_exists( 'BKPC_FS' ) ) {
 				return false;
 			}
 
-			if( unlink( $path ) ) {
+			if ( unlink( $path ) ) {
 				return true;
 			}
 		}

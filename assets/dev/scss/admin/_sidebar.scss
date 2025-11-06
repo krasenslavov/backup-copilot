@@ -1,0 +1,47 @@
+@use '../base/variables' as *;
+
+// Sidebar
+.bkpc-sidebar {
+	background-color: $color-white;
+	border: 1px solid $color-border;
+	border-radius: $border-radius;
+	box-shadow: 0 4px 2px -2px $color-shadow;
+	margin: 10px 0 0 20px;
+	max-width: 320px;
+
+	@media (max-width: $breakpoint-tablet) {
+		margin: 0;
+		max-width: unset;
+		width: 100%;
+	}
+
+	h3 {
+		align-items: center;
+		background-color: $color-bg-dark;
+		display: flex;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.25;
+		margin: 0;
+		padding: 10px;
+		text-transform: uppercase;
+
+		.dashicons {
+			margin-right: $spacing-xs;
+		}
+
+		&:first-of-type {
+			border-top-left-radius: $border-radius;
+			border-top-right-radius: $border-radius;
+		}
+	}
+
+	ol,
+	p {
+		padding: 0 10px;
+	}
+
+	.sysinfo {
+		padding: 10px;
+	}
+}
