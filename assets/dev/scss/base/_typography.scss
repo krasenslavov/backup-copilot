@@ -1,0 +1,37 @@
+@use './variables' as *;
+
+// Typography
+.bkpc {
+	strong {
+		font-weight: 700;
+	}
+
+	.text-success {
+		color: $color-success;
+		font-weight: 700;
+	}
+
+	.text-fail {
+		color: $color-red;
+		font-weight: 700;
+	}
+}
+
+.bkpc-heading {
+	align-items: center;
+	display: flex;
+	font-weight: 500;
+
+	i.dashicons {
+		font-size: 36px;
+		height: auto;
+		margin-right: $spacing-sm;
+		width: auto;
+	}
+}
+
+.bkpc-timer {
+	color: $color-red;
+	font-weight: 500;
+	margin-left: $spacing-sm;
+}

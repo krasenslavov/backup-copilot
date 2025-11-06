@@ -1,20 +1,39 @@
 <?php
+/**
+ * Backup Copilot - Restore Backup Event
+ *
+ * Handles the backup restoration process including database import,
+ * file extraction, and content replacement.
+ *
+ * @package    BKPC
+ * @subpackage Backup_Copilot/Events
+ * @author     Krasen Slavov <hello@krasenslavov.com>
+ * @copyright  2025
+ * @license    GPL-2.0-or-later
+ * @link       https://krasenslavov.com/plugins/backup-copilot/
+ * @since      0.1.0
+ */
 
-namespace BKPC\Backup_Copilot;
+namespace BKPC;
 
 ! defined( ABSPATH ) || exit;
 
 if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 
 	class BKPC_Restore_Backup extends Backup_Copilot {
+		private $fs;
+		private $db;
+		private $mu;
+		private $zip;
+
 		public function __construct() {
 			parent::__construct();
 
 			// Core
-			$this->fs  = new BKPC_FS;
-			$this->db  = new BKPC_DB;
-			$this->mu  = new BKPC_Multisite;
-			$this->zip = new BKPC_Zip;
+			$this->fs  = new BKPC_FS();
+			$this->db  = new BKPC_DB();
+			$this->mu  = new BKPC_Multisite();
+			$this->zip = new BKPC_Zip();
 		}
 
 		public function init() {
@@ -31,11 +50,23 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 		}
 
 		public function restore_backup() {
-			$uuid              = sanitize_text_field( $_REQUEST['uuid'] );
-			$wp2wpmu           = sanitize_text_field( $_REQUEST['wp2wpmu'] );
-			$backup_dir        = $this->settings['bkps_path'] . $uuid . DIRECTORY_SEPARATOR;
+			// Verify nonce and capabilities.
+			if ( ! isset( $_REQUEST['nonce'] )
+				|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'bkpc_ajax_nonce' ) ) {
+				echo wp_json_encode( 'Security check failed!' );
+				exit;
+			}
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				echo wp_json_encode( 'Insufficient permissions!' );
+				exit;
+			}
+
+			$uuid              = sanitize_text_field( wp_unslash( $_REQUEST['uuid'] ) );
+			$wp2wpmu           = isset( $_REQUEST['wp2wpmu'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wp2wpmu'] ) ) : '';
+			$backup_dir        = trailingslashit( $this->settings['bkps_path'] . $uuid );
 			$progress_filename = $backup_dir . 'progress.txt';
-			$zip_filepath      = $backup_dir . $this->settings['db_name'] . '.zip';
+			$zip_filepath      = $backup_dir . $uuid . '.zip';
 
 			$this->fs->remove_file( $progress_filename );
 
@@ -48,11 +79,11 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 				} else {
 					$this->fs->create_file( $progress_filename, 'Deleting site uploads directory...', true );
 				}
-				
+
 				$this->delete_content_files( $this->settings['wpc_path'] );
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
-			
+
 			if ( ! is_dir( $this->settings['wpc_path'] ) ) {
 				$this->fs->create_directory( $this->settings['wpc_path'] );
 			}
@@ -72,14 +103,34 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 			try {
 				$this->fs->create_file( $progress_filename, 'Restoring database...', true );
 
-				$db = new \PDO( 'mysql:host=' . $this->settings['db_hostname'] . ';dbname=' . $this->settings['db_name'], 
-					$this->settings['db_user'], 
-					$this->settings['db_password']
-				);
+				// Parse DB_HOST to handle LocalWP sockets and ports.
+				$db_host = $this->settings['db_hostname'];
+				$port    = null;
+				$socket  = null;
 
-				$db->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
+				// Check if host contains unix socket.
+				if ( strpos( $db_host, ':' ) !== false && strpos( $db_host, '.sock' ) !== false ) {
+					list( $db_host, $socket ) = explode( ':', $db_host, 2 );
+				} elseif ( strpos( $db_host, ':' ) !== false ) {
+					// Check if host contains port.
+					list( $db_host, $port ) = explode( ':', $db_host, 2 );
+				}
 
-				$sql = file_get_contents( $backup_dir . $this->settings['db_name'] . '.sql' );
+				// Build DSN based on connection type.
+				if ( $socket ) {
+					$dsn = 'mysql:unix_socket=' . $socket . ';dbname=' . $this->settings['db_name'];
+				} else {
+					$dsn = 'mysql:host=' . $db_host;
+					if ( $port ) {
+						$dsn .= ';port=' . $port;
+					}
+					$dsn .= ';dbname=' . $this->settings['db_name'];
+				}
+
+				$db = new \PDO( $dsn, $this->settings['db_user'], $this->settings['db_password'] ); // phpcs:ignore
+				$db->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION ); // phpcs:ignore
+
+				$sql = file_get_contents( $backup_dir . $uuid . '.sql' );
 
 				$db->exec( $sql );
 
@@ -88,34 +139,33 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 				echo wp_json_encode( 'MySQL Connection failed: ' . $err->getMessage() );
 				exit;
 			}
-			
+
 			if ( class_exists( 'ZipArchive' ) ) {
 				// Extract archive with PHP `ZipArchive` extension
-				$zip = new \ZipArchive;
+				$zip = new \ZipArchive();
 				$res = $zip->open( $zip_filepath );
 
-				if ( $res === true ) {
-
+				if ( true === $res ) {
 					if ( ! is_multisite() ) {
 						$this->fs->create_file( $progress_filename, 'Restoring wp-content directory...', true );
 					} else {
 						$this->fs->create_file( $progress_filename, 'Restoring site uploads directory...', true );
 					}
-					
+
 					$zip->extractTo( $this->settings['wpc_path'] );
 					$zip->close();
 					$this->fs->create_file( $progress_filename, '[Done]', true );
 				}
 			} else {
-				// Alt: Create archive Unix `unzip` command
+				// Alt: Create archive Unix `unzip` command.
 				exec( 'unzip --help', $output );
-				
+
 				if ( $output ) {
-					exec( 'unzip ' . $zip_filepath . ' -d ' . $this->settings['wpc_path'], $output );
+					exec( 'unzip ' . escapeshellarg( $zip_filepath ) . ' -d ' . escapeshellarg( $this->settings['wpc_path'] ), $output );
 				}
 			}
 
-			sleep( 1 );
+			// sleep( 1 );
 
 			$this->fs->remove_file( $progress_filename );
 
@@ -131,9 +181,9 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 			$files = scandir( $path );
 
 			foreach ( $files as $file ) {
-				if ( $file !== '.' && $file !== '..' ) {
-					$absolute_path = $path . DIRECTORY_SEPARATOR . $file;
-					if ( is_dir( $absolute_path ) && !is_link( $absolute_path ) ) {
+				if ( '.' !== $file && '..' !== $file ) {
+					$absolute_path = trailingslashit( $path ) . $file;
+					if ( is_dir( $absolute_path ) && ! is_link( $absolute_path ) ) {
 						$this->delete_content_files( $absolute_path );
 					} else {
 						unlink( $absolute_path );
@@ -145,6 +195,6 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 		}
 	}
 
-	$bkpc = new BKPC_Restore_Backup;
+	$bkpc = new BKPC_Restore_Backup();
 	$bkpc->init();
 }

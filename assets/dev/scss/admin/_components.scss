@@ -1,0 +1,74 @@
+@use '../base/variables' as *;
+
+// Components
+.bkpc-notice-container {
+	max-width: 320px;
+	position: fixed;
+	right: $spacing-lg;
+	top: 2.725rem;
+}
+
+.bkpc-advanced-options-toggle {
+	font-weight: 700;
+	text-decoration: none;
+
+	i.dashicons {
+		width: 15px;
+	}
+}
+
+.bkpc-add-find-replace-row {
+	font-weight: 700;
+	text-decoration: none;
+
+	i.dashicons {
+		font-size: 12px;
+		position: relative;
+		top: 4px;
+		width: 15px;
+	}
+}
+
+.bkpc-progressbar {
+	background: $color-blue;
+	height: 6px;
+	left: 160px;
+	position: absolute;
+	top: 32px;
+	transition: width $transition-default;
+	width: 0;
+	z-index: 9;
+}
+
+.bkpc-advanced-options {
+	display: none;
+	margin-bottom: $spacing-lg;
+	margin-left: $spacing-lg;
+
+	.find-and-replace-string {
+		margin: $spacing-md 0;
+	}
+
+	input[type='text'] {
+		max-width: 160px;
+	}
+
+	input[type='checkbox'][readonly] {
+		cursor: not-allowed;
+		opacity: 0.25;
+	}
+
+	input[disabled] {
+		cursor: not-allowed;
+	}
+
+	label {
+		display: block;
+		margin: $spacing-md 0;
+
+		input[type='checkbox'] {
+			position: relative;
+			top: 1px;
+		}
+	}
+}

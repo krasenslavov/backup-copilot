@@ -1,0 +1,63 @@
+@use '../base/variables' as *;
+
+// Buttons
+.bkpc {
+	.button.button-red {
+		background: $color-red !important;
+		border-color: $color-red !important;
+
+		&:hover,
+		&:active {
+			background: $color-red !important;
+			border-color: $color-red !important;
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-red;
+		}
+	}
+
+	.button.button-black {
+		background: $color-black !important;
+		border-color: $color-black !important;
+
+		&:hover,
+		&:active {
+			background: $color-black !important;
+			border-color: $color-black !important;
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-black;
+		}
+	}
+
+	button[type='submit'],
+	a.button {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+
+		i.dashicons {
+			font-size: 16px;
+			height: 16px;
+			width: 16px;
+		}
+
+		&.button-rounded {
+			border-radius: $border-radius-round;
+			height: 30px;
+			width: 30px;
+		}
+	}
+
+	.button-group,
+	.button-group > .button {
+		align-items: center;
+		display: flex;
+
+		button:first-child {
+			border-right: 2px solid $color-bg-dark;
+		}
+	}
+}

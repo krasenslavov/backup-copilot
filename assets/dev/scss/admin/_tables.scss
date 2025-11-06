@@ -1,0 +1,85 @@
+@use '../base/variables' as *;
+
+// Tables
+.bkpc-inner-container {
+	table {
+		h4 strong {
+			text-transform: uppercase;
+		}
+
+		small {
+			font-size: 12px;
+		}
+
+		abbr {
+			cursor: pointer;
+		}
+
+		tr:last-child {
+			th,
+			td {
+				align-items: center;
+				border-bottom: 0;
+			}
+		}
+
+		th {
+			background: $color-bg-light;
+			font-weight: 400;
+			max-width: 320px;
+			min-width: 220px;
+			text-align: left;
+
+			@media (max-width: $breakpoint-tablet) {
+				max-width: unset;
+				min-width: unset;
+			}
+		}
+
+		th,
+		td {
+			border-bottom: 1px solid $color-shadow;
+			padding: 10px;
+		}
+
+		td {
+			background: $color-white;
+		}
+	}
+}
+
+.bkpc-all-backups-container {
+	table {
+		width: 100%;
+
+		tr {
+			align-items: stretch;
+			border-bottom: 1px solid $color-shadow;
+			display: flex;
+			flex: 0 0 100%;
+			justify-content: flex-start;
+		}
+
+		th {
+			background: transparent;
+			font-weight: 700;
+			max-width: initial;
+			min-width: initial;
+		}
+
+		td {
+			display: flex;
+			text-wrap: nowrap;
+		}
+
+		th:nth-child(1),
+		td:nth-child(1) {
+			width: 100px;
+		}
+
+		th:nth-child(2),
+		td:nth-child(2) {
+			width: 60px;
+		}
+	}
+}

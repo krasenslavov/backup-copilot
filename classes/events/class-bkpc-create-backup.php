@@ -1,23 +1,44 @@
 <?php
+/**
+ * Backup Copilot - Create Backup Event
+ *
+ * Handles the backup creation process including database exports,
+ * file archiving, and backup size validation.
+ *
+ * @package    BKPC
+ * @subpackage Backup_Copilot/Events
+ * @author     Krasen Slavov <hello@krasenslavov.com>
+ * @copyright  2025
+ * @license    GPL-2.0-or-later
+ * @link       https://krasenslavov.com/plugins/backup-copilot/
+ * @since      0.1.0
+ */
 
-namespace BKPC\Backup_Copilot;
+namespace BKPC;
 
 ! defined( ABSPATH ) || exit;
 
 if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 
 	class BKPC_Create_Backup extends Backup_Copilot {
+		private $fs;
+		private $db;
+		private $zip;
+		private $mu;
+		private $utils;
+		private $delete;
+
 		public function __construct() {
 			parent::__construct();
 
 			// Core
-			$this->fs       = new BKPC_FS;
-			$this->db       = new BKPC_DB;
-			$this->mu       = new BKPC_Multisite;
-			$this->zip      = new BKPC_Zip;
-			$this->utils    = new BKPC_Utils;
+			$this->fs    = new BKPC_FS();
+			$this->db    = new BKPC_DB();
+			$this->mu    = new BKPC_Multisite();
+			$this->zip   = new BKPC_Zip();
+			$this->utils = new BKPC_Utils();
 			// Events
-			$this->delete   = new BKPC_Delete_Backup;
+			$this->delete = new BKPC_Delete_Backup();
 		}
 
 		public function init() {
@@ -35,7 +56,9 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 		}
 
 		public function localize_progress_notice() {
-			wp_localize_script( 'backup_copilot', 'bkpc_create_backup', 
+			wp_localize_script(
+				'bkpc-admin',
+				'bkpc_create_backup',
 				array(
 					'name' => $this->settings['db_name'],
 					'url'  => esc_url( home_url( '/' ) ) . str_replace( ABSPATH, '', $this->settings['bkps_path'] ),
@@ -44,9 +67,27 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 		}
 
 		public function create_backup( $uuid = '', $ajax = true, $export = false ) {
-			$uuid              = $uuid ?: sanitize_text_field( $_REQUEST['uuid'] );
-			$notes             = sanitize_text_field( $_REQUEST['notes'] );
-			$advanced_options  = $this->utils->sanitize_text_field_array( $_REQUEST['advanced_options'] );
+			// Verify nonce and capabilities for AJAX requests.
+			if ( $ajax ) {
+				if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'bkpc_ajax_nonce' ) ) {
+					echo wp_json_encode( esc_html__( 'Security check failed!', 'backup-copilot' ) );
+					exit;
+				}
+
+				if ( ! current_user_can( 'manage_options' ) ) {
+					echo wp_json_encode( esc_html__( 'Insufficient permissions!', 'backup-copilot' ) );
+					exit;
+				}
+			}
+
+			$uuid = $uuid ? sanitize_text_field( $uuid ) : ( isset( $_REQUEST['uuid'] )
+				? sanitize_text_field( wp_unslash( $_REQUEST['uuid'] ) ) : '' );
+
+			$notes = isset( $_REQUEST['notes'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['notes'] ) ) : '';
+
+			$advanced_options = isset( $_REQUEST['advanced_options'] )
+				? $this->utils->sanitize_text_field_array( wp_unslash( $_REQUEST['advanced_options'] ) )
+				: array();
 
 			if ( is_multisite() ) {
 				$advanced_options = array(
@@ -57,15 +98,20 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 			}
 
 			if ( $export ) {
-				$find_text         = $this->utils->sanitize_text_field_array( $_REQUEST['find_text'] );
-				$replace_with_text = $this->utils->sanitize_text_field_array( $_REQUEST['replace_with_text'] );
+				$find_text = isset( $_REQUEST['find_text'] )
+					? $this->utils->sanitize_text_field_array( wp_unslash( $_REQUEST['find_text'] ) )
+					: array();
+
+				$replace_with_text = isset( $_REQUEST['replace_with_text'] )
+					? $this->utils->sanitize_text_field_array( wp_unslash( $_REQUEST['replace_with_text'] ) )
+					: array();
 			}
 
-			$wpc_dir            = $this->settings['wpc_path'];
-			$backup_dir         = $this->settings['bkps_path'] . $uuid . DIRECTORY_SEPARATOR;
-			$zip_filename       = $backup_dir . $this->settings['db_name'] . '.zip';
-			$notes_filename     = $backup_dir . 'notes.txt';
-			$progress_filename  = $backup_dir . 'progress.txt';
+			$wpc_dir           = $this->settings['wpc_path'];
+			$backup_dir        = trailingslashit( $this->settings['bkps_path'] . $uuid );
+			$zip_filename      = $backup_dir . $uuid . '.zip';
+			$notes_filename    = $backup_dir . 'notes.txt';
+			$progress_filename = $backup_dir . 'progress.txt';
 
 			$this->max_backup_size( $uuid, $wpc_dir );
 
@@ -79,13 +125,13 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
 
-			if ( in_array( 'htaccess', $advanced_options ) && ! $export ) {
+			if ( in_array( 'htaccess', $advanced_options, true ) && ! $export ) {
 				$this->fs->create_file( $progress_filename, 'Copying .htaccess file...', true );
 				$this->fs->copy_file( ABSPATH . '.htaccess', $backup_dir . '.htaccess' );
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
 
-			if ( in_array( 'wpconfig', $advanced_options ) && ! $export ) {
+			if ( in_array( 'wpconfig', $advanced_options, true ) && ! $export ) {
 				$this->fs->create_file( $progress_filename, 'Copying wp-config.php file...', true );
 				$this->fs->copy_file( ABSPATH . 'wp-config.php', $backup_dir . 'wp-config.php' );
 				$this->fs->create_file( $progress_filename, '[Done]', true );
@@ -93,7 +139,7 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 
 			$this->mu->add_mu_option( $uuid );
 
-			if ( in_array( 'database', $advanced_options ) ) {
+			if ( in_array( 'database', $advanced_options, true ) ) {
 				$this->fs->create_file( $progress_filename, 'Saving database...', true );
 
 				if ( $export ) {
@@ -105,33 +151,37 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
 
-			if ( in_array( 'content', $advanced_options ) ) {
+			// Create zip if ANY content-related option is selected.
+			$content_options = array( 'content', 'themes', 'plugins', 'mu-plugins', 'uploads', 'cache', 'backups' );
+			$has_content     = ! empty( array_intersect( $content_options, $advanced_options ) );
+
+			if ( $has_content ) {
 				$this->fs->create_file( $progress_filename, 'Creating content archive... ', true );
 				$this->zip->create_zip_archive( $wpc_dir, $zip_filename, $advanced_options );
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
 
-			sleep( 1 );
+			// sleep( 1 );
 
 			if ( ! $export ) {
 				$this->fs->remove_file( $progress_filename );
 			}
-			
+
 			$this->max_backup_size( $uuid, $backup_dir, true );
 
-			if ($ajax) {
-				echo wp_json_encode( 'New backup point was created successfully!' );
+			if ( $ajax ) {
+				echo wp_json_encode( esc_html__( 'New backup point was created successfully!', 'backup-copilot' ) );
 				exit;
 			}
 		}
 
 		public function max_backup_size( $uuid, $path, $delete = false ) {
 			// Maximum backup size: 500MB
-			$backup_max_size       = 0.5 * ( 1024 * 1024 * 1024 ); 
+			$backup_max_size       = 0.5 * ( 1024 * 1024 * 1024 );
 			$backup_limit_exceeded = false;
-			// With 60% average zip compression ratio 
+			// With 60% average zip compression ratio
 			// wp-content directory size cannot exceed ~800MB
-			$wpc_dir_max_size      = $backup_max_size + ( $backup_max_size * 0.6 ); 
+			$wpc_dir_max_size = $backup_max_size + ( $backup_max_size * 0.6 );
 
 			if ( ! $uuid ) {
 				return false;
@@ -146,12 +196,12 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 					$this->delete->delete_backup( $uuid );
 				}
 
-				echo wp_json_encode( 'New backup point failed! You are over the maximum backup limit size!' );
+				echo wp_json_encode( esc_html__( 'New backup point failed! You are over the maximum backup limit size!', 'backup-copilot' ) );
 				exit;
 			}
 		}
 	}
 
-	$bkpc = new BKPC_Create_Backup;
+	$bkpc = new BKPC_Create_Backup();
 	$bkpc->init();
 }

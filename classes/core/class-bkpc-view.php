@@ -1,32 +1,47 @@
 <?php
+/**
+ * Backup Copilot - View Handler
+ *
+ * Handles all view/template rendering for the plugin including
+ * main admin page, backup lists, and configuration display.
+ *
+ * @package    BKPC
+ * @subpackage Backup_Copilot/Core
+ * @author     Krasen Slavov <hello@krasenslavov.com>
+ * @copyright  2025
+ * @license    GPL-2.0-or-later
+ * @link       https://krasenslavov.com/plugins/backup-copilot/
+ * @since      0.1.0
+ */
 
-namespace BKPC\Backup_Copilot;
+namespace BKPC;
 
-! defined (ABSPATH ) || exit;
+! defined( ABSPATH ) || exit;
 
 if ( ! class_exists( 'BKPC_View' ) ) {
 
 	class BKPC_View extends Backup_Copilot {
+		private $utils;
+
 		public function __construct() {
-			$this->utils = new BKPC_Utils;
+			$this->utils = new BKPC_Utils();
 
 			parent::__construct();
 		}
 
-		public function load_backup_copilot_main_page()
-		{
+		public function load_backup_copilot_main_page() {
 			?>
 				<div class="wrap">
 					<div class="bkpc">
 						<div class="bkpc-header">
 							<header>
 								<h1>
-									Backup Copilot
+									<?php esc_html_e( 'Backup Copilot', 'backup-copilot' ); ?>
 									<span class="bkpc-timer"></span>
 								</h1>
 								<p>
-									Quickly and easily create backup points of your WordPress installation to restore, export, or transfer to another location.<br /><br />
-									Maxiumum backup size: <strong>500MB</strong>
+									<?php esc_html_e( 'Quickly and easily create backup points of your WordPress installation to restore, export, or transfer to another location.', 'backup-copilot' ); ?><br /><br />
+									<?php esc_html_e( 'Maximum backup size:', 'backup-copilot' ); ?> <strong>500MB</strong>
 								</p>
 							</header>
 						</div>
@@ -39,114 +54,115 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 											<th valign="top">
 												<h4>
 													<i class="dashicons dashicons-admin-site-alt2"></i>
-													<strong>Create or export your backup</strong>
+													<strong><?php esc_html_e( 'Create or export your backup', 'backup-copilot' ); ?></strong>
 												</h4>
 												<p>
-													<em>Add some notes to describe your backup. Use advanced options to create custom backups.</em>
+													<em><?php esc_html_e( 'Add some notes to describe your backup. Use advanced options to create custom backups.', 'backup-copilot' ); ?></em>
 												</p>
 												<p>
-													<small>* Backup Export will only generate backup for download and doesn't save any files on your server.</small>
+													<small><?php esc_html_e( '* Backup Export will only generate backup for download and doesn\'t save any files on your server.', 'backup-copilot' ); ?></small>
 												</p>
 											</th>
 											<td valign="top">
-												<form id="create-export-backup" method="post" action="<?php echo esc_url(admin_url()); ?>admin.php?page=create_backup">
+												<form id="create-export-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=create_backup">
+													<?php wp_nonce_field( 'bkpc_create_backup', 'bkpc_create_backup_nonce' ); ?>
 													<p>
-														<input type="text" name="notes" placeholder="Notes..." class="regular-text" />
+														<input type="text" name="notes" placeholder="<?php esc_attr_e( 'Notes...', 'backup-copilot' ); ?>" class="regular-text" />
 													</p>
 													<?php if ( get_current_blog_id() === 1 ) : ?>
 														<p>
-															<a href="#" class="bkpc-advanced-options-toggle" title="See advanced export options...">
+															<a href="#" class="bkpc-advanced-options-toggle" title="<?php esc_attr_e( 'See advanced export options...', 'backup-copilot' ); ?>">
 																<i class="dashicons dashicons-arrow-right"></i>
-																Advanced Options...
+																<?php esc_html_e( 'Advanced Options...', 'backup-copilot' ); ?>
 															</a>
 														</p>
 														<div class="bkpc-advanced-options" id="advanced-options">
 															<label>
 																<input type="checkbox" name="advanced-options" value="htaccess" />
-																Save <strong>.htaccess</strong> file
+																<?php esc_html_e( 'Save', 'backup-copilot' ); ?> <strong>.htaccess</strong> <?php esc_html_e( 'file', 'backup-copilot' ); ?>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="wpconfig" />
-																Save <strong>wp-config.php</strong> file
+																<?php esc_html_e( 'Save', 'backup-copilot' ); ?> <strong>wp-config.php</strong> <?php esc_html_e( 'file', 'backup-copilot' ); ?>
 															</label>
 															<p>
-																<small><strong>.htaccess and wp-config.php</strong> files can be saved only for <strong>Create Export</strong>.</small>
+																<small><?php esc_html_e( '.htaccess and wp-config.php files can be saved only for Create Export.', 'backup-copilot' ); ?></small>
 															</p>
 															<div class="find-and-replace-string">
-																<input type="text" name="find-text" placeholder="Find URL..." />
-																<input type="text" name="replace-with-text" placeholder="Replace with URL..." />
+																<input type="text" name="find-text" placeholder="<?php esc_attr_e( 'Find URL...', 'backup-copilot' ); ?>" />
+																<input type="text" name="replace-with-text" placeholder="<?php esc_attr_e( 'Replace with URL...', 'backup-copilot' ); ?>" />
 															</div>
 															<p>
-																<small><strong>Find and Replace URL</strong> is only used for <strong>Backup Export</strong>.</small>
+																<small><?php esc_html_e( 'Find and Replace URL is only used for Backup Export.', 'backup-copilot' ); ?></small>
 															</p>
 															<div class="find-and-replace-string">
-																<input type="text" name="find-text" placeholder="Find text..." disabled />
-																<input type="text" name="replace-with-text" placeholder="Replace with text..." disabled />
+																<input type="text" name="find-text" placeholder="<?php esc_attr_e( 'Find text...', 'backup-copilot' ); ?>" disabled />
+																<input type="text" name="replace-with-text" placeholder="<?php esc_attr_e( 'Replace with text...', 'backup-copilot' ); ?>" disabled />
 															</div>
 															<p>
-																<a href="#" class="bkpc-add-find-replace-row" title="Add another find and replace text group..">
+																<a href="#" class="bkpc-add-find-replace-row" title="<?php esc_attr_e( 'Add another find and replace text group...', 'backup-copilot' ); ?>">
 																	<i class="dashicons dashicons-plus-alt"></i>
-																	Add Row...
+																	<?php esc_html_e( 'Add Row...', 'backup-copilot' ); ?>
 																</a>
 															</p>
 															<label>
 																<input type="checkbox" name="advanced-options" value="spam-comments" checked readonly onclick="return false;" />
-																Export <strong>spam comments</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'spam comments', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="post-revisions" checked readonly onclick="return false;" />
-																Export <strong>post revisions</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'post revisions', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="uploads" checked />
-																Export <strong>media library</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'media library', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="themes" checked />
-																Export <strong>themes</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'themes', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="inactive-themes" checked  readonly onclick="return false;" />
-																Export <strong>inactive themes</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'inactive themes', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="mu-plugins" checked />
-																Export <strong>must-use plugins</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'must-use plugins', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="plugins" checked />
-																Export <strong>plugins</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'plugins', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="inactive-plugins" checked readonly onclick="return false;" />
-																Export <strong>inactive plugins</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'inactive plugins', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="cache" />
-																Export <strong>cache</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'cache', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="backups" />
-																Export <strong>3rd-party backups</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( '3rd-party backups', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="database" checked />
-																Export <strong>database</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'database', 'backup-copilot' ); ?></strong>
 															</label>
 															<label>
 																<input type="checkbox" name="advanced-options" value="content" checked />
-																Export <strong>wp-content</strong>
+																<?php esc_html_e( 'Export', 'backup-copilot' ); ?> <strong><?php esc_html_e( 'wp-content', 'backup-copilot' ); ?></strong>
 															</label>
 														</div>
 													<?php endif; ?>
 													<div class="button-group">
 														<button type="submit" name="create-backup" class="button button-primary">
 															<i class="dashicons dashicons-plus-alt"></i>
-															&nbsp;Create
+															&nbsp;<?php esc_html_e( 'Create', 'backup-copilot' ); ?>
 														</button>
 														<button type="submit" name="export-backup" class="button button-primary">
 															<i class="dashicons dashicons-database-export"></i>
-															&nbsp;Export
+															&nbsp;<?php esc_html_e( 'Export', 'backup-copilot' ); ?>
 														</button>
 													</div>
 												</form>
@@ -156,27 +172,28 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 											<th valign="top">
 												<h4>
 													<i class="dashicons dashicons-database-import"></i>
-													<strong>Import your backup</strong>
+													<strong><?php esc_html_e( 'Import your backup', 'backup-copilot' ); ?></strong>
 												</h4>
 												<p>
-													<em>Upload your full backup and have it ready to be restored.</em>
+													<em><?php esc_html_e( 'Upload your full backup and have it ready to be restored.', 'backup-copilot' ); ?></em>
 												</p>
 												<p>
-													<small>* You can only restore from full backup files. (e.g. file name 1639558327.zip)</small>
+													<small><?php esc_html_e( '* You can only restore from full backup files. (e.g. file name 1639558327.zip)', 'backup-copilot' ); ?></small>
 												</p>
 											</th>
 											<td valign="top">
-												<form id="import-backup" method="post" action="<?php echo esc_url(admin_url()); ?>admin.php?page=upload_backup">
+												<form id="import-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=upload_backup">
+													<?php wp_nonce_field( 'bkpc_upload_backup', 'bkpc_upload_backup_nonce' ); ?>
 													<p class="bkpc-custom-file-upload">
 														<label>
 															<input type="file" name="backup-file" class="regular-text" />
-															<span>Choose Backup File...</span>
+															<span><?php esc_html_e( 'Choose Backup File...', 'backup-copilot' ); ?></span>
 														</label>
 													</p>
 													<p>
 														<button type="submit" name="upload-backup" class="button button-primary">
 															<i class="dashicons dashicons-upload"></i>
-															&nbsp;Upload
+															&nbsp;<?php esc_html_e( 'Upload', 'backup-copilot' ); ?>
 														</button>
 													</p>
 												</form>
@@ -186,26 +203,26 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 											<th valign="top">
 												<h4>
 													<i class="dashicons dashicons-backup"></i>
-													<strong>All backups</strong>
+													<strong><?php esc_html_e( 'All backups', 'backup-copilot' ); ?></strong>
 												</h4>
 												<p>
-													<em>List with all avaialble backups on your server.</em>
+													<em><?php esc_html_e( 'List with all available backups on your server.', 'backup-copilot' ); ?></em>
 												</p>
 												<p>
-													<small>* Hold your mouse over each icon to view full description for the action.</small><br />
-													<small>** Backups with delete and download full backup buttons are copies of your exports you can either delete them or they will be overwritten when/if you import the same backup.</small>
+													<small><?php esc_html_e( '* Hold your mouse over each icon to view full description for the action.', 'backup-copilot' ); ?></small><br />
+													<small><?php esc_html_e( '** Backups with delete and download full backup buttons are copies of your exports you can either delete them or they will be overwritten when/if you import the same backup.', 'backup-copilot' ); ?></small>
 												</p>
 											</th>
 											<td valign="top">
 												<div id="bkpc-all-backups-container" class="bkpc-all-backups-container">
 													<table>
 														<tr>
-															<th>Created</th>
-															<th>Size</th>
-															<th>Actions</th>
+															<th><?php esc_html_e( 'Created', 'backup-copilot' ); ?></th>
+															<th><?php esc_html_e( 'Size', 'backup-copilot' ); ?></th>
+															<th><?php esc_html_e( 'Actions', 'backup-copilot' ); ?></th>
 														</tr>
+														<?php $this->display_all_backups( $this->settings['bkps_path'] ); ?>
 													</table>
-													<?php $this->display_all_backups( $this->settings['bkps_path'] ); ?>
 												</div>
 											</td>
 										</tr>
@@ -214,12 +231,12 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 							</main>
 							<aside>
 								<div class="bkpc-sidebar">
-									<?php $this->display_sidebar();?>
+									<?php $this->display_sidebar(); ?>
 								</div>
 							</aside>
 						</div>
 						<div class="bkpc-footer">
-							<?php $this->display_footer();?>
+							<?php $this->display_footer(); ?>
 						</div>
 					</div>
 				</div>
@@ -230,11 +247,11 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 			ob_start();
 
 			$this->get_all_backups( $path );
-			$content = ob_get_contents(); 
+			$content = ob_get_contents();
 
 			ob_end_clean();
 
-			echo ( ! $content ) ? '<p><em>No backups found!</em></p>' : $content;
+			echo ( ! $content ) ? '<p><em>' . esc_html__( 'No backups found!', 'backup-copilot' ) . '</em></p>' : $content;
 		}
 
 		private function get_all_backups( $path ) {
@@ -245,8 +262,8 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 			$files = scandir( $path );
 
 			foreach ( $files as $file ) {
-				if ($file !== '.' && $file !== '..') {
-					$absolute_path = $path . DIRECTORY_SEPARATOR . $file;
+				if ( '.' !== $file && '..' !== $file ) {
+					$absolute_path = trailingslashit( $path ) . $file;
 					if ( is_dir( $absolute_path ) ) {
 						// Multisite: Don't show backups that doesn't belong current Blog.
 						if ( is_multisite() && ( get_option( $file ) !== get_current_blog_id() ) ) {
@@ -256,23 +273,37 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 						$this->display_form_actions( $file );
 						$this->get_all_backups( $absolute_path );
 						?>
-								</tr>
-						</table>
+						<td>
+							<form id="delete-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=delete_backup">
+								<?php wp_nonce_field( 'bkpc_delete_backup_' . $file, 'bkpc_delete_backup_nonce' ); ?>
+								<input type="hidden" name="uuid" value="<?php echo esc_attr( $file ); ?>" />
+								<button type="submit" name="delete-backup" class="button button-primary button-red button-rounded" title="Delete Backup...">
+									<i class="dashicons dashicons-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
 						<?php
 					} else {
-
-						if ( is_multisite() ) {
-							$url = esc_url( network_home_url( '/' ) ) . str_replace( ABSPATH, '', $absolute_path );
-						} else {
-							$url = esc_url( home_url( '/' ) ) . str_replace( ABSPATH, '', $absolute_path );
+						// Only display file links if we're inside a backup directory (not root .bkps).
+						if ( rtrim( $path, '/\\' ) === rtrim( $this->settings['bkps_path'], '/\\' ) ) {
+							continue;
 						}
 
-						switch ( pathinfo($absolute_path, PATHINFO_EXTENSION ) ) {
+						if ( is_multisite() ) {
+							$relative_path = str_replace( ABSPATH, '', $absolute_path );
+							$url           = esc_url( network_home_url( '/' ) ) . str_replace( '\\', '/', $relative_path );
+						} else {
+							$relative_path = str_replace( ABSPATH, '', $absolute_path );
+							$url           = esc_url( home_url( '/' ) ) . str_replace( '\\', '/', $relative_path );
+						}
+
+						switch ( pathinfo( $absolute_path, PATHINFO_EXTENSION ) ) {
 							case 'sql':
 								$this->display_sql_link( $url );
 								break;
 							case 'zip':
-								if ( $file === $this->settings['db_name'] . '.zip' ) {
+								if ( $file === basename( $path ) . '.zip' ) {
 									$this->display_wpcontent_link( $url );
 								} else {
 									$this->display_download_link( $url );
@@ -283,6 +314,17 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 									$this->display_notes_link( $url );
 								}
 								break;
+							case 'php':
+								if ( $file === 'wp-config.php' ) {
+									$this->display_wpconfig_link( $url );
+								}
+								break;
+							case 'htaccess':
+							case '':
+								if ( $file === '.htaccess' ) {
+									$this->display_htaccess_link( $url );
+								}
+								break;
 							default:
 								break;
 						}
@@ -291,12 +333,11 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 			}
 		}
 
-		private function display_form_actions($uuid) {
+		private function display_form_actions( $uuid ) {
 			?>
-				<table>
 					<tr>
 						<td>
-							<abbr title="This backup is created on <?php echo esc_textarea( date( 'Y-m-d', $uuid ) ); ?> at <?php echo esc_textarea( date( 'H:i:s', $uuid ) ); ?>">
+							<abbr title="This backup is created on <?php echo esc_textarea( wp_date( 'Y-m-d', $uuid ) ); ?> at <?php echo esc_textarea( wp_date( 'H:i:s', $uuid ) ); ?>">
 								<?php echo esc_textarea( $this->utils->get_time_elapsed( $uuid ) ); ?>
 							</abbr>
 						</td>
@@ -307,10 +348,16 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 								</abbr>
 							</strong>
 						</td>
-						<!-- if .zip and .sql are missing & are not with same DB_NAME don't show restore and full backup forms -->
-						<?php if ( file_exists($this->settings['bkps_path'] . DIRECTORY_SEPARATOR . $uuid . DIRECTORY_SEPARATOR . $this->settings['db_name'] . '.sql' ) && file_exists( $this->settings['bkps_path'] . DIRECTORY_SEPARATOR . $uuid . DIRECTORY_SEPARATOR . $this->settings['db_name'] . '.zip' ) ) : ?>
+						<!-- Show restore and download buttons if either .sql or .zip files exist -->
+						<?php
+						$sql_file         = trailingslashit( $this->settings['bkps_path'] . $uuid ) . $uuid . '.sql';
+						$zip_file         = trailingslashit( $this->settings['bkps_path'] . $uuid ) . $uuid . '.zip';
+						$has_backup_files = file_exists( $sql_file ) || file_exists( $zip_file );
+						?>
+						<?php if ( $has_backup_files ) : ?>
 							<td>
 								<form id="restore-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=restore_backup">
+									<?php wp_nonce_field( 'bkpc_restore_backup_' . $uuid, 'bkpc_restore_backup_nonce' ); ?>
 									<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
 									<button type="submit" name="restore-backup" class="button button-primary button-rounded" title="Restore Backup...">
 										<i class="dashicons dashicons-update-alt"></i>
@@ -319,6 +366,7 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 							</td>
 							<td>
 								<form id="download-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=download_backup">
+									<?php wp_nonce_field( 'bkpc_download_backup_' . $uuid, 'bkpc_download_backup_nonce' ); ?>
 									<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
 									<button type="submit" name="download-backup" class="button button-primary button-rounded" title="Generate Full Download...">
 										<i class="dashicons dashicons-download"></i>
@@ -327,9 +375,10 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 							</td>
 						<?php endif; ?>
 						<?php if ( is_multisite() ) : ?>
-							<?php if( ! file_exists($this->settings['bkps_path'] . DIRECTORY_SEPARATOR . $uuid . DIRECTORY_SEPARATOR . $this->settings['db_name'] . '.sql' ) || ! file_exists( $this->settings['bkps_path'] . DIRECTORY_SEPARATOR . $uuid . DIRECTORY_SEPARATOR . $this->settings['db_name'] . '.zip' ) ) : ?>
+							<?php if ( ! file_exists( trailingslashit( $this->settings['bkps_path'] . $uuid ) . $uuid . '.sql' ) || ! file_exists( trailingslashit( $this->settings['bkps_path'] . $uuid ) . $uuid . '.zip' ) ) : ?>
 								<td>
 									<form id="restore-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=restore_backup">
+										<?php wp_nonce_field( 'bkpc_restore_backup_' . $uuid, 'bkpc_restore_backup_nonce' ); ?>
 										<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
 										<input type="hidden" name="wp2wpmu" value="1" />
 										<button type="submit" name="restore-backup" class="button button-primary button-rounded" title="Restore Multiste Backup... (WP -> WPMu)" disabled>
@@ -339,21 +388,13 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 								</td>
 							<?php endif; ?>
 						<?php endif; ?>
-						<td>
-							<form id="delete-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=delete_backup">
-								<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
-								<button type="submit" name="delete-backup" class="button button-primary button-red button-rounded" title="Delete Backup...">
-									<i class="dashicons dashicons-trash"></i>
-								</button>
-							</form>
-						</td>
 			<?php
 		}
 
 		private function display_sql_link( $url ) {
 			?>
 				<td>
-					<a href="<?php echo $url; ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download Database...">
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download Database...">
 						<i class="dashicons dashicons-database"></i>
 					</a>
 				</td>
@@ -363,7 +404,7 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 		private function display_wpcontent_link( $url ) {
 			?>
 				<td>
-					<a href="<?php echo $url; ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download WP Content...">
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download WP Content...">
 						<i class="dashicons dashicons-media-archive"></i>
 					</a>
 				</td>
@@ -373,7 +414,7 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 		private function display_download_link( $url ) {
 			?>
 				<td>
-					<a href="<?php echo $url; ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download Full Backup...">
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download Full Backup...">
 						<i class="dashicons dashicons-archive"></i>
 					</a>
 				</td>
@@ -383,8 +424,28 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 		private function display_notes_link( $url ) {
 			?>
 				<td>
-					<a href="<?php echo $url; ?>" class="button button-primary button-black button-rounded" target="_blank" title="Open Notes...">
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Open Notes...">
 						<i class="dashicons dashicons-editor-textcolor"></i>
+					</a>
+				</td>
+			<?php
+		}
+
+		private function display_wpconfig_link( $url ) {
+			?>
+				<td>
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download wp-config.php...">
+						<i class="dashicons dashicons-admin-settings"></i>
+					</a>
+				</td>
+			<?php
+		}
+
+		private function display_htaccess_link( $url ) {
+			?>
+				<td>
+					<a href="<?php echo esc_url( $url ); ?>" class="button button-primary button-black button-rounded" target="_blank" title="Download .htaccess...">
+						<i class="dashicons dashicons-admin-generic"></i>
 					</a>
 				</td>
 			<?php
@@ -394,53 +455,82 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 			?>
 				<h3>
 					<i class="dashicons dashicons-sos"></i>
-					Support
+					<?php esc_html_e( 'Support', 'backup-copilot' ); ?>
 				</h3>
 				<ol>
 					<li>
-						Go to your <a href="<?php esc_url( admin_url( '/' ) ); ?>/wp-admin/site-health.php?tab=debug">Site Health Info</a> page and click the <strong>Copy Site Info to Clipboard</strong> button.
+						<?php
+						printf(
+							/* translators: %1$s: Site Health Info link, %2$s: button text */
+							esc_html__( 'Go to your %1$s page and click the %2$s button.', 'backup-copilot' ),
+							'<a href="' . esc_url( admin_url( 'site-health.php?tab=debug' ) ) . '">' . esc_html__( 'Site Health Info', 'backup-copilot' ) . '</a>',
+							'<strong>' . esc_html__( 'Copy Site Info to Clipboard', 'backup-copilot' ) . '</strong>'
+						);
+						?>
 					</li>
 					<li>
-						Go to the Copilot Plus <a href="<?php echo esc_url( $this->settings['plugin_docurl'] ); ?>" target="_blank">Contact Us</a> page and send us a message with the Site Health Info contens included.
+						<?php
+						printf(
+							/* translators: %1$s: Contact Us link */
+							esc_html__( 'Go to the Copilot Plus %1$s page and send us a message with the Site Health Info contents included.', 'backup-copilot' ),
+							'<a href="' . esc_url( $this->settings['plugin_docurl'] ) . '" target="_blank">' . esc_html__( 'Contact Us', 'backup-copilot' ) . '</a>'
+						);
+						?>
 					</li>
 					<li>
-						Or search and create a support ticket at the plugin <a href="<?php echo esc_url( $this->settings['plugin_wporgurl'] ); ?>" target="_blank">Support Tab</a> page directly at WP.org.
+						<?php
+						printf(
+							/* translators: %1$s: Support Tab link */
+							esc_html__( 'Or search and create a support ticket at the plugin %1$s page directly at WP.org.', 'backup-copilot' ),
+							'<a href="' . esc_url( $this->settings['plugin_wporgurl'] ) . '" target="_blank">' . esc_html__( 'Support Tab', 'backup-copilot' ) . '</a>'
+						);
+						?>
 					</li>
 				</ol>
 				<p>
-					<strong>DON'T POST YOUR SITE HEALTH INFO CONTENTS ONTO THE PUBLIC PLUGIN FORUMS!</strong>
+					<strong><?php esc_html_e( "DON'T POST YOUR SITE HEALTH INFO CONTENTS ONTO THE PUBLIC PLUGIN FORUMS!", 'backup-copilot' ); ?></strong>
 				</p>
 				<h3>
-					<i class="dashicons dashicons-admin-settings"></i>  
-					Configuration
+					<i class="dashicons dashicons-admin-settings"></i>
+					<?php esc_html_e( 'Configuration', 'backup-copilot' ); ?>
 				</h3>
 				<div class="sysinfo">
 					<?php
-					echo ( class_exists( 'ZipArchive' ) ) ? '<strong class="text-success">[OK]</strong>' : '<strong class="text-fail">[Failed]</strong>'; 
-					echo ' Create archive files.<br />';
-				
-					try {
-						$db = new \PDO( 'mysql:host=' . $this->settings['db_hostname'] . ';dbname=' . $this->settings['db_name'], $this->settings['db_user'], $this->settings['db_password'] );
-						echo '<strong class="text-success">[OK]</strong>';
-					} catch( \PDOException $err ) {
-						echo '<strong class="text-fail">[Failed]</strong>';
-					}
-					
-					echo ' Connect to database.<br />';
+					echo ( class_exists( 'ZipArchive' ) ) ? '<strong class="text-success">[OK]</strong>' : '<strong class="text-fail">[Failed]</strong>';
+					echo ' ' . esc_html__( 'Create archive files.', 'backup-copilot' ) . '<br />';
 
-					echo ( is_writable(ABSPATH ) ) ? '<strong class="text-success">[OK]</strong>' : '<strong class="text-fail">[Failed]</strong>'; 
-					echo ' Base path permissions.<br />';
-					
-					echo ( is_writable( $this->settings['wpc_path'] ) ) ? '<strong class="text-success">[OK]</strong>': '<strong class="text-fail">[Failed]</strong>';
-					echo ' Content path permissions.<br />';
+					try {
+						// Check if database constants are defined.
+						if ( ! defined( 'DB_HOST' ) || ! defined( 'DB_NAME' ) || ! defined( 'DB_USER' ) || ! defined( 'DB_PASSWORD' ) ) {
+							echo '<strong class="text-fail">[Failed]</strong> - ' . esc_html__( 'Database constants not defined', 'backup-copilot' );
+						} else {
+							// Use WordPress database connection instead of PDO.
+							global $wpdb;
+							if ( $wpdb->check_connection( false ) ) {
+								echo '<strong class="text-success">[OK]</strong>';
+							} else {
+								echo '<strong class="text-fail">[Failed]</strong> - ' . esc_html__( 'Cannot connect to database', 'backup-copilot' );
+							}
+						}
+					} catch ( \Exception $err ) {
+						echo '<strong class="text-fail">[Failed]</strong> - ' . esc_html( $err->getMessage() );
+					}
+
+					echo ' ' . esc_html__( 'Connect to database.', 'backup-copilot' ) . '<br />';
+
+					echo ( is_writable( ABSPATH ) ) ? '<strong class="text-success">[OK]</strong>' : '<strong class="text-fail">[Failed]</strong>';
+					echo ' ' . esc_html__( 'Base path permissions.', 'backup-copilot' ) . '<br />';
+
+					echo ( is_writable( $this->settings['wpc_path'] ) ) ? '<strong class="text-success">[OK]</strong>' : '<strong class="text-fail">[Failed]</strong>';
+					echo ' ' . esc_html__( 'Content path permissions.', 'backup-copilot' ) . '<br />';
 
 					echo '&mdash;&mdash;&mdash;<br />';
 
-					echo '<strong class="text-success">' . ini_get( 'upload_max_filesize' ) . '</strong> Maximum upload file size<br />';
-					echo '<strong class="text-success">' . ini_get( 'post_max_size' ) . '</strong> Maximum post file size.<br />';
-					echo '<strong class="text-success">' . ini_get( 'memory_limit' ) . '</strong> Memory limit.<br />';
-					echo '<strong class="text-success">' . ini_get( 'max_execution_time' ). '</strong> Maximum execution time.<br />';
-					echo '<strong class="text-success">' . ini_get( 'max_input_time' ) . '</strong> Maximum input time.';
+					echo '<strong class="text-success">' . esc_html( ini_get( 'upload_max_filesize' ) ) . '</strong> ' . esc_html__( 'Maximum upload file size', 'backup-copilot' ) . '<br />';
+					echo '<strong class="text-success">' . esc_html( ini_get( 'post_max_size' ) ) . '</strong> ' . esc_html__( 'Maximum post file size.', 'backup-copilot' ) . '<br />';
+					echo '<strong class="text-success">' . esc_html( ini_get( 'memory_limit' ) ) . '</strong> ' . esc_html__( 'Memory limit.', 'backup-copilot' ) . '<br />';
+					echo '<strong class="text-success">' . esc_html( ini_get( 'max_execution_time' ) ) . '</strong> ' . esc_html__( 'Maximum execution time.', 'backup-copilot' ) . '<br />';
+					echo '<strong class="text-success">' . esc_html( ini_get( 'max_input_time' ) ) . '</strong> ' . esc_html__( 'Maximum input time.', 'backup-copilot' );
 					?>
 				</div>
 			<?php
@@ -449,7 +539,7 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 		private function display_footer() {
 			?>
 				<p>
-					<small>* Server timeout may occur on hosting providers with restrictions (e.g. WPEngine) and may cause corrupted backup files for sites with data over 1GB.</small>
+					<small><?php esc_html_e( '* Server timeout may occur on hosting providers with restrictions (e.g. WPEngine) and may cause corrupted backup files for sites with data over 1GB.', 'backup-copilot' ); ?></small>
 				</p>
 			<?php
 		}
