@@ -1,0 +1,12 @@
+<IfModule mod_mime.c>
+	AddType application/zip .zip
+	AddType multipart/x-zip .zip
+	AddType application/x-zip-compressed .zip
+	AddType application/octet-stream .zip
+</IfModule>
+<IfModule mod_dir.c>
+	DirectoryIndex index.php
+</IfModule>
+<IfModule mod_autoindex.c>
+	Options -Indexes
+</IfModule>
