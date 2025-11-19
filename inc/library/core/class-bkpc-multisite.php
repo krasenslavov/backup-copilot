@@ -21,20 +21,89 @@ if ( ! class_exists( 'BKPC_Multisite' ) ) {
 
 		/**
 		 * Add multisite option to track which blog a backup belongs to.
+		 * Stores in the main site's options table so it's accessible from anywhere.
 		 */
 		public function add_mu_option( $uuid ) {
-			if ( is_multisite() && ! get_option( $uuid ) ) {
-				add_option( $uuid, get_current_blog_id() );
+			if ( ! is_multisite() ) {
+				return;
 			}
+
+			$current_blog_id = get_current_blog_id();
+
+			// Switch to main site to store the option there.
+			switch_to_blog( 1 );
+
+			// Use a prefixed option name to avoid collisions with numeric UUIDs.
+			$option_name = 'bkpc_backup_blog_' . $uuid;
+
+			if ( ! get_option( $option_name ) ) {
+				add_option( $option_name, $current_blog_id );
+			}
+
+			// Switch back to current site.
+			restore_current_blog();
+		}
+
+		/**
+		 * Get the blog ID for a backup.
+		 * Reads from the main site's options table.
+		 *
+		 * @param string $uuid Backup UUID.
+		 * @return int|false Blog ID if found, false otherwise.
+		 */
+		public function get_mu_option( $uuid ) {
+			if ( ! is_multisite() ) {
+				return false;
+			}
+
+			// Switch to main site to read the option from there.
+			switch_to_blog( 1 );
+
+			$option_name = 'bkpc_backup_blog_' . $uuid;
+			$blog_id     = get_option( $option_name );
+
+			// Backward compatibility: Check for old-style option (without prefix).
+			if ( false === $blog_id ) {
+				$blog_id = get_option( $uuid );
+				// If found, migrate to new format.
+				if ( false !== $blog_id ) {
+					add_option( $option_name, $blog_id );
+					delete_option( $uuid );
+				}
+			}
+
+			// Switch back to current site.
+			restore_current_blog();
+
+			return $blog_id;
 		}
 
 		/**
 		 * Delete multisite option for a backup.
+		 * Removes from the main site's options table.
 		 */
 		public function delete_mu_option( $uuid ) {
-			if ( is_multisite() && get_option( $uuid ) ) {
+			if ( ! is_multisite() ) {
+				return;
+			}
+
+			// Switch to main site to delete the option from there.
+			switch_to_blog( 1 );
+
+			$option_name = 'bkpc_backup_blog_' . $uuid;
+
+			// Delete new-style option.
+			if ( get_option( $option_name ) ) {
+				delete_option( $option_name );
+			}
+
+			// Backward compatibility: Also delete old-style option if it exists.
+			if ( get_option( $uuid ) ) {
 				delete_option( $uuid );
 			}
+
+			// Switch back to current site.
+			restore_current_blog();
 		}
 
 		/**

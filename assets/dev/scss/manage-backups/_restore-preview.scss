@@ -117,16 +117,16 @@
 				border-left: $border-width-sm-md  solid $color-orange;
 
 				h3, p, li {
-					color: $color-orange;
+					color: color.adjust($color-orange, $lightness: -25%);
 				}
 			}
 
 			&.bkpc-danger {
-				background: $color-white-alt;
+				background: color.adjust($color-red, $lightness: 65%);
 				border-left: $border-width-sm-md solid $color-red;
 
 				h3, p, li {
-					color: $color-red;
+					color: color.adjust($color-red, $lightness: -25%);
 				}
 
 				.bkpc-warning-text {

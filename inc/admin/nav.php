@@ -17,10 +17,10 @@ $current_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET[
 ?>
 
 <div class="bkpc-admin">
-	<h2>
+	<h1>
 		<?php esc_html_e( 'Backup Copilot', 'backup-copilot' ); ?>
 		<span class="bkpc-timer"></span>
-	</h2>
+	</h1>
 	<p>
 		<?php esc_html_e( 'Simple and powerful WordPress backup and restore plugin. Backup your database and files, restore with one click, and migrate your site effortlessly.', 'backup-copilot' ); ?>
 	</p>
@@ -32,10 +32,50 @@ $current_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET[
 			<?php echo esc_html__( 'Manage Backups', 'backup-copilot' ); ?>
 		</a>
 		<a 
+			href="https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=pro_badge" 
+			class="bkcp-manage-backups-tab"
+			target="_blank"
+		>
+			<?php echo esc_html__( 'Cloud Storage', 'backup-copilot' ); ?>
+			<span class="bkpc-status-badge bkpc-status-upgrade">
+				<?php echo esc_html__( 'Pro', 'wp-media-recovery' ); ?>
+			</span>
+		</a>
+		<a 
+			href="https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=pro_badge" 
+			target="_blank"
+			class="bkcp-backup-scheduler-tab"
+		>
+			<?php echo esc_html__( 'Backup Scheduler', 'backup-copilot' ); ?>
+			<span class="bkpc-status-badge bkpc-status-upgrade">
+				<?php echo esc_html__( 'Pro', 'wp-media-recovery' ); ?>
+			</span>
+		</a>
+		<a 
+			href="https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=pro_badge" 
+			class="bkcp-license-tab"
+			target="_blank"
+		>
+			<?php echo esc_html__( 'License', 'backup-copilot' ); ?>
+			<span class="bkpc-status-badge bkpc-status-upgrade">
+				<?php echo esc_html__( 'Pro', 'wp-media-recovery' ); ?>
+			</span>
+		</a>
+		<a 
 			href="<?php echo esc_url( admin_url( 'admin.php?page=' . BKPC_SETTINGS_SLUG ) ); ?>"
 			class="bkcp-settings-tab <?php echo ( BKPC_SETTINGS_SLUG === $current_page ) ? 'current' : ''; ?>"
 		>
 			<?php echo esc_html__( 'Settings', 'backup-copilot' ); ?>
+		</a>
+		<a
+			href="https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=pro_badge" 
+			class="bkpc-help-tab"
+			target="_blank"
+		>
+			<?php echo esc_html__( 'Help', 'backup-copilot' ); ?>
+			<span class="bkpc-status-badge bkpc-status-upgrade">
+				<?php echo esc_html__( 'Pro', 'wp-media-recovery' ); ?>
+			</span>
 		</a>
 	</nav>
 </div>

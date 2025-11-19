@@ -3,7 +3,7 @@
  * Plugin Name:  Backup Copilot
  * Plugin URI: https://backupcopilotplugin.com
  * Description: Simple and powerful WordPress backup and restore plugin. Backup your database and files, restore with one click, and migrate your site effortlessly.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Krasen Slavov
  * Author URI: https://developry.com/
  * License: GPLv3 or later
@@ -31,8 +31,6 @@ namespace DEVRY\BKPC;
 
 ! defined( ABSPATH ) || exit; // Exit if accessed directly.
 
-error_reporting( E_ALL & ~E_DEPRECATED & ~E_NOTICE );
-
 /**
  * Environment constant - controls asset loading
  * Set to 'dev' for development, 'prod' for production
@@ -51,7 +49,7 @@ define( __NAMESPACE__ . '\BKPC_MIN_WP_VERSION', '5.0' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_UUID', 'bkpc' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_TEXTDOMAIN', 'backup-copilot-pro' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_NAME', 'Backup Copilot' );
-define( __NAMESPACE__ . '\BKPC_PLUGIN_VERSION', '1.1.0' );
+define( __NAMESPACE__ . '\BKPC_PLUGIN_VERSION', '1.1.1' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_DOMAIN', 'https://backupcopilotplugin.com' );
 
 

@@ -1,0 +1,37 @@
+@use '../base/variables' as *;
+
+.bkpc-admin {
+	.bkpc-status-badge {
+		border-radius: $border-radius;
+		border-width: $border-width-sm solid rgba($color-black, 0.15);
+		box-sizing: border-box;
+		color: $color-white;
+		display: inline-block;
+		font-size: $font-size-sm;
+		font-weight: $font-weight-bold;
+		line-height: 2;
+		margin: 0;
+		min-height: 30px;
+		padding: 0 $spacing-sm;
+		text-decoration: none;
+		white-space: nowrap;
+
+		&.bkpc-status-valid {
+			background-color: $color-green;
+		}
+
+		&.bkpc-status-invalid {
+			background-color: $color-red;
+		}
+
+		&.bkpc-status-upgrade {
+			background-color: $color-blue;
+			font-size: $font-size-xs;
+			line-height: 1;
+			margin: 0 0 0 $spacing-xs;
+			min-height: auto;
+			padding: $spacing-xs;
+			text-transform: uppercase;
+		}
+	}
+}

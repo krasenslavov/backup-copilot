@@ -18,9 +18,11 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 
 	class BKPC_View {
 		private $utils;
+		private $mu;
 
 		public function __construct() {
 			$this->utils = new BKPC_Utils();
+			$this->mu    = new BKPC_Multisite();
 		}
 
 		public function load_backup_copilot_main_page() {
@@ -212,6 +214,9 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 													<table>
 														<tr>
 															<th><?php esc_html_e( 'Created', 'backup-copilot' ); ?></th>
+															<?php if ( is_multisite() && 1 === get_current_blog_id() ) : ?>
+																<th><?php esc_html_e( 'Site', 'backup-copilot' ); ?></th>
+															<?php endif; ?>
 															<th><?php esc_html_e( 'Size', 'backup-copilot' ); ?></th>
 															<th><?php esc_html_e( 'Actions', 'backup-copilot' ); ?></th>
 														</tr>
@@ -253,7 +258,7 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 				return false;
 			}
 
-			$files = scandir( $path );
+			$files = scandir( $path, SCANDIR_SORT_DESCENDING );
 
 			foreach ( $files as $file ) {
 				if ( '.' !== $file && '..' !== $file ) {
@@ -264,22 +269,53 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 							continue;
 						}
 
-						// Multisite: Don't show backups that doesn't belong current Blog.
-						if ( is_multisite() && ( get_option( $file ) !== get_current_blog_id() ) ) {
-							continue;
+						// Multisite: Filter backups by site.
+						if ( is_multisite() ) {
+							$current_blog_id = get_current_blog_id();
+							$backup_blog_id  = $this->mu->get_mu_option( $file );
+
+							// Main site (blog ID 1) can see all backups.
+							if ( 1 === $current_blog_id ) {
+								// Skip if backup doesn't have blog ID set (shouldn't happen, but safety check).
+								if ( ! $backup_blog_id ) {
+									continue;
+								}
+								// Main site sees all backups - no filtering needed.
+							} else {
+								// Subsites only see their own backups.
+								// Skip if backup doesn't have blog ID set.
+								if ( ! $backup_blog_id ) {
+									continue;
+								}
+								// Skip if backup belongs to different site.
+								if ( $current_blog_id !== (int) $backup_blog_id ) {
+									continue;
+								}
+							}
 						}
 
 						$this->display_form_actions( $file );
 						$this->get_all_backups( $absolute_path );
+
+						// Check if backup belongs to current site (for multisite read-only logic).
+						$current_blog_id = get_current_blog_id();
+						$backup_blog_id  = is_multisite() ? $this->mu->get_mu_option( $file ) : $current_blog_id;
+						$is_own_backup   = ( $current_blog_id === (int) $backup_blog_id );
 						?>
 						<td>
-							<form id="delete-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=delete_backup">
-								<?php wp_nonce_field( 'bkpc_delete_backup_' . $file, 'bkpc_delete_backup_nonce' ); ?>
-								<input type="hidden" name="uuid" value="<?php echo esc_attr( $file ); ?>" />
-								<button type="submit" name="delete-backup" class="button button-primary button-red button-rounded" title="Delete Backup...">
+							<?php if ( $is_own_backup ) : ?>
+								<form id="delete-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=delete_backup">
+									<?php wp_nonce_field( 'bkpc_delete_backup_' . $file, 'bkpc_delete_backup_nonce' ); ?>
+									<input type="hidden" name="uuid" value="<?php echo esc_attr( $file ); ?>" />
+									<button type="submit" name="delete-backup" class="button button-primary button-red button-rounded" title="<?php esc_attr_e( 'Delete Backup...', 'backup-copilot' ); ?>">
+										<i class="dashicons dashicons-trash"></i>
+									</button>
+								</form>
+							<?php else : ?>
+								<button type="button" class="button button-secondary button-rounded" disabled title="<?php esc_attr_e( 'Read-only: Cannot delete other sites\' backups', 'backup-copilot' ); ?>">
 									<i class="dashicons dashicons-trash"></i>
 								</button>
-							</form>
+							<?php endif; ?>
 						</td>
 					</tr>
 						<?php
@@ -335,33 +371,54 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 		}
 
 		private function display_form_actions( $uuid ) {
+			// Check if backup belongs to current site (for multisite read-only logic).
+			$current_blog_id = get_current_blog_id();
+			$backup_blog_id  = is_multisite() ? $this->mu->get_mu_option( $uuid ) : $current_blog_id;
+			$is_own_backup   = ( $current_blog_id === (int) $backup_blog_id );
 			?>
-					<tr>
+				<tr>
+					<td>
+						<abbr title="This backup is created on <?php echo esc_textarea( wp_date( 'Y-m-d', $uuid ) ); ?> at <?php echo esc_textarea( wp_date( 'H:i:s', $uuid ) ); ?>">
+							<?php echo esc_textarea( $this->utils->get_time_elapsed( $uuid ) ); ?>
+						</abbr>
+					</td>
+					<?php if ( is_multisite() && 1 === get_current_blog_id() ) : ?>
 						<td>
-							<abbr title="This backup is created on <?php echo esc_textarea( wp_date( 'Y-m-d', $uuid ) ); ?> at <?php echo esc_textarea( wp_date( 'H:i:s', $uuid ) ); ?>">
-								<?php echo esc_textarea( $this->utils->get_time_elapsed( $uuid ) ); ?>
+								<?php
+								if ( $backup_blog_id ) {
+									$blog_details = get_blog_details( $backup_blog_id );
+									if ( $blog_details ) {
+										echo '<abbr title="' . esc_attr( $blog_details->siteurl ) . '">';
+										echo esc_html( $blog_details->blogname );
+										echo '</abbr>';
+									} else {
+										echo esc_html__( 'Site #', 'backup-copilot' ) . esc_html( $backup_blog_id );
+									}
+								}
+								?>
+						</td>
+					<?php endif; ?>
+					<td>
+						<strong>
+							<abbr title="All files localted in the backup directory.">
+								<?php echo esc_textarea( $this->utils->show_dir_size( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) ); ?>
 							</abbr>
-						</td>
-						<td>
-							<strong>
-								<abbr title="All files localted in the backup directory.">
-									<?php echo esc_textarea( $this->utils->show_dir_size( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) ); ?>
-								</abbr>
-							</strong>
-						</td>
-						<!-- Show restore and download buttons if either .sql or .zip files exist -->
-						<?php
-						$sql_file          = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.sql';
-						$zip_file          = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.zip';
-						$download_zip_file = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . 'download-' . $uuid . '.zip';
-						$has_backup_files  = file_exists( $sql_file ) || file_exists( $zip_file ) || file_exists( $download_zip_file );
-						?>
-						<?php if ( $has_backup_files ) : ?>
+						</strong>
+					</td>
+					<!-- Show restore and download buttons if either .sql or .zip files exist -->
+					<?php
+					$sql_file          = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.sql';
+					$zip_file          = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.zip';
+					$download_zip_file = trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . 'download-' . $uuid . '.zip';
+					$has_backup_files  = file_exists( $sql_file ) || file_exists( $zip_file ) || file_exists( $download_zip_file );
+					?>
+					<?php if ( $has_backup_files ) : ?>
+						<?php if ( $is_own_backup ) : ?>
 							<td>
 								<form id="restore-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=restore_backup">
 									<?php wp_nonce_field( 'bkpc_restore_backup_' . $uuid, 'bkpc_restore_backup_nonce' ); ?>
 									<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
-									<button type="submit" name="restore-backup" class="button button-primary button-rounded" title="Restore Backup...">
+									<button type="submit" name="restore-backup" class="button button-primary button-rounded" title="<?php esc_attr_e( 'Restore Backup...', 'backup-copilot' ); ?>">
 										<i class="dashicons dashicons-update-alt"></i>
 									</button>
 								</form>
@@ -370,26 +427,24 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 								<form id="download-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=download_backup">
 									<?php wp_nonce_field( 'bkpc_download_backup_' . $uuid, 'bkpc_download_backup_nonce' ); ?>
 									<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
-									<button type="submit" name="download-backup" class="button button-primary button-rounded" title="Generate Full Download...">
+									<button type="submit" name="download-backup" class="button button-primary button-rounded" title="<?php esc_attr_e( 'Generate Full Download...', 'backup-copilot' ); ?>">
 										<i class="dashicons dashicons-download"></i>
 									</button>
 								</form>
 							</td>
+						<?php else : ?>
+							<td>
+								<button type="button" class="button button-secondary button-rounded" disabled title="<?php esc_attr_e( 'Read-only: Cannot restore other sites\' backups', 'backup-copilot' ); ?>">
+									<i class="dashicons dashicons-update-alt"></i>
+								</button>
+							</td>
+							<td>
+								<button type="button" class="button button-secondary button-rounded" disabled title="<?php esc_attr_e( 'Read-only: Cannot download other sites\' backups', 'backup-copilot' ); ?>">
+									<i class="dashicons dashicons-download"></i>
+								</button>
+							</td>
 						<?php endif; ?>
-						<?php if ( is_multisite() ) : ?>
-							<?php if ( ! file_exists( trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.sql' ) || ! file_exists( trailingslashit( BKPC_PLUGIN_BACKUP_DIR_PATH . $uuid ) . $uuid . '.zip' ) ) : ?>
-								<td>
-									<form id="restore-backup" method="post" action="<?php echo esc_url( admin_url() ); ?>admin.php?page=restore_backup">
-										<?php wp_nonce_field( 'bkpc_restore_backup_' . $uuid, 'bkpc_restore_backup_nonce' ); ?>
-										<input type="hidden" name="uuid" value="<?php echo esc_attr( $uuid ); ?>" />
-										<input type="hidden" name="wp2wpmu" value="1" />
-										<button type="submit" name="restore-backup" class="button button-primary button-rounded" title="Restore Multiste Backup... (WP -> WPMu)" disabled>
-											<i class="dashicons dashicons-admin-multisite"></i>
-										</button>
-									</form>
-								</td>
-							<?php endif; ?>
-						<?php endif; ?>
+					<?php endif; ?>
 			<?php
 		}
 
@@ -541,10 +596,10 @@ if ( ! class_exists( 'BKPC_View' ) ) {
 
 		public function display_footer() {
 			?>
-				<p class="bg-color-orange" style="padding: 10px 15px; border-radius: 4px; margin: 0 10px 15px 10px;">
+				<p class="bkpc-footer">
 					<small>
 						&bullet; <strong><?php esc_html_e( 'Maximum backup size: 500MB', 'backup-copilot' ); ?></strong><br />
-						&bullet; <?php esc_html_e( 'Server timeout may occur on hosting providers with restrictions (e.g. WPEngine) and may cause corrupted backup files for sites with data over 1GB.', 'backup-copilot' ); ?>
+						&bullet; <?php esc_html_e( 'Server timeout may occur on hosting providers with restrictions (e.g. WPEngine) and may cause corrupted backup files.', 'backup-copilot' ); ?>
 					</small>
 				</p>
 			<?php

@@ -4,6 +4,10 @@
 .bkpc-admin {
 	position: relative;
 
+	h1 {
+		margin-bottom: $spacing-sm;
+	}
+
 	h2 {
 		align-items: center;
 		display: flex;

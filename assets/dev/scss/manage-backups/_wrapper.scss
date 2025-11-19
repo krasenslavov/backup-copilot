@@ -15,6 +15,13 @@
 		margin-left: $spacing-sm;
 	}
 
+	.bkpc-footer {
+		background-color: $color-orange;
+		border-radius: $border-radius; 
+		margin: 0 $spacing-sm $spacing-md $spacing-sm;
+		padding: $spacing-sm $spacing-md;
+	}
+
 	textarea {
 		max-width: 100%;
 		padding: $spacing-xs $spacing-sm;
