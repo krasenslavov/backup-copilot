@@ -1,0 +1,23 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+
+.wp-submenu a[href*="page=bkpc_settings"] {
+	display: none !important;
+	height: 0 !important;
+}
+
+.wp-submenu a.current[href*="page=bkpc_manage_backups"] {
+	color: $color-white !important;
+	font-weight: 600 !important;
+}
+
+#toplevel_page_bkpc_manage_backups .wp-submenu {
+	display: none;
+}
+
+body[class*="page_bkpc"] {
+	#wpfooter {
+		display: none;
+	}
+}

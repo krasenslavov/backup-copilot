@@ -1,0 +1,37 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-danger-zone {
+	margin-bottom: $spacing-md;
+	
+	h3 {
+		color: $color-red;
+		margin-top: 0;
+
+		.dashicons {
+			color: $color-red;
+		}
+	}
+
+	p {
+		margin-bottom: $spacing-md;
+
+		strong {
+			color: color.adjust($color-red, $lightness: -10%);
+		}
+
+		small {
+			color: color.adjust($color-red, $lightness: -20%);
+			display: block;
+			margin-top: $spacing-xs;
+		}
+	}
+
+	button {
+		background-color: $color-red !important;
+		border: $border-width-sm-md solid rgba(0, 0, 0, 0.1) !important;
+		border-radius: $border-radius !important;
+		color: $color-white !important;
+		font-weight: $font-weight-bold;
+	}
+}

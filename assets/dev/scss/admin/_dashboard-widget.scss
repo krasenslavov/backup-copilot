@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+// Dashboard Widget
+.bkpc-dashboard-widget {
+	.bkpc-widget-summary {
+		border-bottom: $border-width-sm solid $color-border;
+		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
+
+		p {
+			line-height: 1.6;
+			margin: 0;
+		}
+
+		strong {
+			font-size: $font-size-sm;
+		}
+	}
+
+	.bkpc-widget-stats {
+		border-bottom: 1px solid $color-border;
+		display: flex;
+		gap: $spacing-md;
+		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
+
+		.bkpc-stat-item {
+			align-items: center;
+			display: flex;
+			flex: 1;
+			gap: $spacing-sm;
+
+			div {
+				display: flex;
+				flex-direction: column;
+			}
+
+			strong {
+				font-size: $font-size-lg;
+				line-height: 1.2;
+			}
+
+			small {
+				font-size: $font-size-xs;
+				letter-spacing: 0.5px;
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	.bkpc-widget-backups {
+		margin-bottom: $spacing-md;
+
+		h4 {
+			font-size: $font-size-sm !important;
+			font-weight: $font-weight-normal !important;
+			margin: 0 0 $spacing-sm;
+			text-transform: uppercase;
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				align-items: center;
+				background-color: $color-light-grey;
+				border-bottom: $border-width-sm solid $color-border;
+				display: flex;
+				gap: $spacing-sm;
+				margin-bottom: 1px;
+				padding: $spacing-sm;
+				text-align: left;
+
+				&:last-child {
+					border-bottom: 0;
+				}
+
+				span {
+					font-weight: $font-weight-bold;
+				}
+
+				small {
+					font-size: $font-size-xs;
+					position: relative;
+					text-align: right;
+					top: -1px;
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	.bkpc-widget-actions {
+		display: flex;
+		margin-top: $spacing-md;
+	}
+}
+
+#bkpc_dashboard_widget {
+	h2 {
+		align-items: center;
+		display: flex;
+		gap: $spacing-xs;
+
+		.dashicons {
+			color: $color-blue;
+		}
+	}
+}

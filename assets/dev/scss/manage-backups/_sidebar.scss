@@ -1,0 +1,26 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-manage-backups-sidebar {
+	ol {
+		background-color: $color-white;
+		margin: 0 0 $spacing-md 0;
+		padding: $spacing-md $spacing-lg;
+
+		+ p {
+			font-size: $font-size-sm;
+			margin: 0 0 $spacing-md 0;
+		}
+
+		li {
+			line-height: 1.4;
+			margin-left: $spacing-md;
+		}
+	}
+
+	.sysinfo {
+		background-color: $color-white;
+		margin: 0 0 $spacing-md 0;
+		padding: $spacing-md $spacing-lg;
+	}
+}

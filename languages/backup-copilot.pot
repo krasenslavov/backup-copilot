@@ -1,0 +1,1182 @@
+# Backup Copilot - Simple and powerful WordPress backup and restore plugin. Backup your database and files, restore with one click, and migrate your site effortlessly.
+# Copyright (c) 2025 Backup Copilot
+# This file is distributed under the same license as the plugin, GPLv3 or later.
+# Krasen Slavov <contact@developry.com>, 2025.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.1\n"
+"Report-Msgid-Bugs-To: Backup Copilot <contact@developry.com>\n"
+"POT-Creation-Date: 2025-11-05 10:03+0200\n"
+"PO-Revision-Date: 2025-11-19 10:03+0200\n"
+"Last-Translator: Krasen Slavov <contact@developry.com>\n"
+"Language-Team: BKPC <contact@developry.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Eazy Po 1.0.0.0\n"
+
+#: inc/admin/nav.php:21 inc/admin/manage-backups/manage-backups-menu.php:23
+#: inc/admin/manage-backups/manage-backups-menu.php:24
+#: inc/admin/manage-backups/manage-backups-menu.php:34
+#: inc/admin/manage-backups/manage-backups-menu.php:35
+#: inc/admin/requirements/dashboard-widget.php:27
+#: inc/admin/requirements/pro-plugin.php:81
+#: inc/admin/requirements/user-profile.php:27
+#: inc/library/core/class-bkpc-view.php:33
+msgid "Backup Copilot"
+msgstr ""
+
+#: inc/admin/nav.php:25
+msgid ""
+"Simple and powerful WordPress backup and restore plugin. Backup your "
+"database and files, restore with one click, and migrate your site "
+"effortlessly."
+msgstr ""
+
+#: inc/admin/nav.php:32 inc/admin/requirements/dashboard-widget.php:82
+msgid "Manage Backups"
+msgstr ""
+
+#: inc/admin/nav.php:38 inc/admin/settings/settings-menu.php:24
+#: inc/admin/settings/settings-menu.php:33
+msgid "Settings"
+msgstr ""
+
+#: inc/admin/pro-table.php:21
+msgid "Get the PRO version today!"
+msgstr ""
+
+#: inc/admin/pro-table.php:24
+msgid ""
+"The PRO version offers advanced backup automation, cloud storage "
+"integration, and premium support."
+msgstr ""
+
+#: inc/admin/pro-table.php:28
+msgid "Feature"
+msgstr ""
+
+#: inc/admin/pro-table.php:29
+msgid "Free"
+msgstr ""
+
+#: inc/admin/pro-table.php:30
+msgid "PRO"
+msgstr ""
+
+#: inc/admin/pro-table.php:33
+msgid "Manual Backups"
+msgstr ""
+
+#: inc/admin/pro-table.php:34 inc/admin/pro-table.php:35
+#: inc/admin/pro-table.php:39 inc/admin/pro-table.php:40
+#: inc/admin/pro-table.php:44 inc/admin/pro-table.php:45
+#: inc/admin/pro-table.php:80 inc/admin/pro-table.php:85
+msgid "✓"
+msgstr ""
+
+#: inc/admin/pro-table.php:38
+msgid "Database & Files Backup"
+msgstr ""
+
+#: inc/admin/pro-table.php:43
+msgid "One-Click Restore"
+msgstr ""
+
+#: inc/admin/pro-table.php:48
+msgid "Download Backups"
+msgstr ""
+
+#: inc/admin/pro-table.php:49
+msgid "ZIP Export"
+msgstr ""
+
+#: inc/admin/pro-table.php:50
+msgid "Multiple formats"
+msgstr ""
+
+#: inc/admin/pro-table.php:53
+msgid "Backup Scheduling"
+msgstr ""
+
+#: inc/admin/pro-table.php:54 inc/admin/pro-table.php:59
+#: inc/admin/pro-table.php:64 inc/admin/pro-table.php:74
+#: inc/admin/pro-table.php:79
+msgid "✗"
+msgstr ""
+
+#: inc/admin/pro-table.php:55
+msgid "Daily, Weekly, Monthly"
+msgstr ""
+
+#: inc/admin/pro-table.php:58
+msgid "Cloud Storage"
+msgstr ""
+
+#: inc/admin/pro-table.php:60
+msgid "Dropbox, Drive, OneDrive"
+msgstr ""
+
+#: inc/admin/pro-table.php:63
+msgid "Email Alerts"
+msgstr ""
+
+#: inc/admin/pro-table.php:65
+msgid "Success & Failure"
+msgstr ""
+
+#: inc/admin/pro-table.php:68
+msgid "Retention Management"
+msgstr ""
+
+#: inc/admin/pro-table.php:69
+msgid "Manual Only"
+msgstr ""
+
+#: inc/admin/pro-table.php:70
+msgid "Auto-Delete old backups"
+msgstr ""
+
+#: inc/admin/pro-table.php:73
+msgid "Migration & Cloning"
+msgstr ""
+
+#: inc/admin/pro-table.php:75
+msgid "URL Find/Replace"
+msgstr ""
+
+#: inc/admin/pro-table.php:78
+msgid "Emergency Rollback"
+msgstr ""
+
+#: inc/admin/pro-table.php:83
+msgid "Priority Email Support"
+msgstr ""
+
+#: inc/admin/pro-table.php:84
+msgid "Community forums"
+msgstr ""
+
+#: inc/admin/pro-table.php:88
+msgid "Plugin Updates & New Features"
+msgstr ""
+
+#: inc/admin/pro-table.php:89
+msgid "Delayed"
+msgstr ""
+
+#: inc/admin/pro-table.php:90
+msgid "First access"
+msgstr ""
+
+#: inc/admin/pro-table.php:99
+msgid "GET PRO VERSION"
+msgstr ""
+
+#: inc/admin/pro-table.php:106
+msgid "Watch Video"
+msgstr ""
+
+#: inc/admin/pro-table.php:115
+msgid ""
+"Need automated backups with cloud storage integration and advanced features?"
+msgstr ""
+
+#: inc/admin/pro-table.php:116
+msgid "Get the PRO version now"
+msgstr ""
+
+#: inc/admin/pro-table.php:137
+msgid "Note"
+msgstr ""
+
+#: inc/admin/manage-backups/delete-all-backups.php:33
+#: inc/admin/manage-backups/delete-safety-backup.php:33
+#: inc/admin/manage-backups/generate-uuid.php:33
+#: inc/admin/manage-backups/manage-backups-progress.php:33
+#: inc/admin/manage-backups/restore-preview.php:33
+#: inc/admin/requirements/wp-pointers.php:104
+msgid "Insufficient permissions."
+msgstr ""
+
+#: inc/admin/manage-backups/delete-all-backups.php:43
+msgid "Backup directory does not exist."
+msgstr ""
+
+#: inc/admin/manage-backups/delete-all-backups.php:79
+#, php-format
+msgid ""
+"Successfully deleted %d backup(s). The .bkps directory has been cleared."
+msgstr ""
+
+#: inc/admin/manage-backups/delete-safety-backup.php:43
+msgid "Invalid safety backup UUID."
+msgstr ""
+
+#: inc/admin/manage-backups/delete-safety-backup.php:54
+msgid "Safety backup deleted successfully."
+msgstr ""
+
+#: inc/admin/manage-backups/delete-safety-backup.php:60
+msgid "Failed to delete safety backup."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:29
+#: inc/library/core/class-bkpc-view.php:51
+msgid "Create or export your backup"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:30
+#: inc/library/core/class-bkpc-view.php:54
+msgid ""
+"Add some notes to describe your backup. Use advanced options to create "
+"custom backups."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:37
+#: inc/library/core/class-bkpc-view.php:64
+msgid "Notes..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:41
+#: inc/library/core/class-bkpc-view.php:68
+msgid "See advanced export options..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:43
+#: inc/library/core/class-bkpc-view.php:70
+msgid "Advanced Options..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:49
+#: inc/admin/manage-backups/manage-backups-main-page.php:53
+#: inc/admin/settings/settings-main-page.php:31
+#: inc/admin/settings/settings-main-page.php:51
+#: inc/library/core/class-bkpc-view.php:76
+#: inc/library/core/class-bkpc-view.php:80
+msgid "Save"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:49
+#: inc/admin/manage-backups/manage-backups-main-page.php:53
+#: inc/library/core/class-bkpc-view.php:76
+#: inc/library/core/class-bkpc-view.php:80
+msgid "file"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:57
+msgid "Security Warning:"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:58
+msgid ""
+"These files contain sensitive configuration data including database "
+"credentials. Only save them if absolutely necessary and ensure your backup "
+"directory is properly secured."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:62
+msgid ""
+".htaccess and wp-config.php files can be saved only for Create Backup (not "
+"Export)."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:65
+#: inc/library/core/class-bkpc-view.php:86
+msgid "Find URL..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:66
+#: inc/library/core/class-bkpc-view.php:87
+msgid "Replace with URL..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:69
+msgid "Add another find and replace URL row..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:71
+#: inc/library/core/class-bkpc-view.php:99
+msgid "Add Row..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:75
+#: inc/library/core/class-bkpc-view.php:90
+msgid "Find and Replace URL is only used for Backup Export."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:79
+#: inc/admin/manage-backups/manage-backups-main-page.php:83
+#: inc/admin/manage-backups/manage-backups-main-page.php:87
+#: inc/admin/manage-backups/manage-backups-main-page.php:91
+#: inc/admin/manage-backups/manage-backups-main-page.php:95
+#: inc/admin/manage-backups/manage-backups-main-page.php:99
+#: inc/admin/manage-backups/manage-backups-main-page.php:103
+#: inc/admin/manage-backups/manage-backups-main-page.php:107
+#: inc/admin/manage-backups/manage-backups-main-page.php:111
+#: inc/admin/manage-backups/manage-backups-main-page.php:115
+#: inc/admin/manage-backups/manage-backups-main-page.php:119
+#: inc/admin/manage-backups/manage-backups-main-page.php:123
+#: inc/admin/manage-backups/manage-backups-main-page.php:142
+#: inc/library/core/class-bkpc-view.php:104
+#: inc/library/core/class-bkpc-view.php:108
+#: inc/library/core/class-bkpc-view.php:112
+#: inc/library/core/class-bkpc-view.php:116
+#: inc/library/core/class-bkpc-view.php:120
+#: inc/library/core/class-bkpc-view.php:124
+#: inc/library/core/class-bkpc-view.php:128
+#: inc/library/core/class-bkpc-view.php:132
+#: inc/library/core/class-bkpc-view.php:136
+#: inc/library/core/class-bkpc-view.php:140
+#: inc/library/core/class-bkpc-view.php:144
+#: inc/library/core/class-bkpc-view.php:148
+#: inc/library/core/class-bkpc-view.php:159
+msgid "Export"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:79
+#: inc/library/core/class-bkpc-view.php:104
+msgid "spam comments"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:83
+#: inc/library/core/class-bkpc-view.php:108
+msgid "post revisions"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:87
+#: inc/library/core/class-bkpc-view.php:112
+msgid "media library"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:91
+#: inc/library/core/class-bkpc-view.php:116
+msgid "themes"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:95
+#: inc/library/core/class-bkpc-view.php:120
+msgid "inactive themes"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:99
+#: inc/library/core/class-bkpc-view.php:124
+msgid "must-use plugins"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:103
+#: inc/library/core/class-bkpc-view.php:128
+msgid "plugins"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:107
+#: inc/library/core/class-bkpc-view.php:132
+msgid "inactive plugins"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:111
+#: inc/library/core/class-bkpc-view.php:136
+msgid "cache"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:115
+#: inc/library/core/class-bkpc-view.php:140
+msgid "3rd-party backups"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:119
+#: inc/library/core/class-bkpc-view.php:144
+msgid "database"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:123
+#: inc/library/core/class-bkpc-view.php:148
+msgid "wp-content"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:134
+#: inc/library/core/class-bkpc-view.php:155
+msgid "Create"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:147
+msgid ""
+"Backup Export will only generate backup for download and doesn't save any "
+"files on your server."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:153
+#: inc/library/core/class-bkpc-view.php:200
+msgid "All backups"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:154
+#: inc/library/core/class-bkpc-view.php:203
+msgid "List with all available backups on your server."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:161
+msgid "Created On"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:162
+#: inc/library/core/class-bkpc-view.php:215
+msgid "Size"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:163
+#: inc/library/core/class-bkpc-view.php:216
+msgid "Actions"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:169
+msgid "Hold your mouse over each icon to view full description for the action."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:170
+msgid ""
+"Backups with delete and download full backup buttons are copies of your "
+"exports you can either delete them or they will be overwritten when/if you "
+"import the same backup."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:176
+#: inc/library/core/class-bkpc-view.php:169
+msgid "Import your backup"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:177
+#: inc/library/core/class-bkpc-view.php:172
+msgid "Upload your full backup and have it ready to be restored."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:186
+#: inc/library/core/class-bkpc-view.php:184
+msgid "Choose Backup File..."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:192
+#: inc/library/core/class-bkpc-view.php:190
+msgid "Upload"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:203
+#, php-format
+msgid ""
+"Upload formats: <strong>%1$s</strong> (full backup - extracts all files) or "
+"<strong>%2$s</strong> (wp-content only - no extraction)."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:215
+msgid "Danger Zone"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:216
+msgid ""
+"Permanently delete all backup files and empty the .bkps directory. This "
+"action cannot be undone."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:225
+msgid "Delete All Backups"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:233
+msgid "Actions Legend"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:234
+msgid "Explanation of all available action buttons."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:246
+msgid "Restore Backup"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:247
+msgid "Restore your site from this backup point (creates safety backup first)."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:257
+msgid "Generate Full Download"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:258
+msgid "Create a downloadable ZIP archive of the entire backup."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:268
+msgid "Download Full Backup"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:269
+msgid ""
+"Download the generated full backup archive (available after generation)."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:279
+msgid "Download Database"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:280
+msgid "Download the SQL database file."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:290
+msgid "Download WP Content"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:291
+msgid "Download the wp-content directory archive."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:301
+msgid "Download Notes"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:302
+msgid "View or download backup notes."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:312
+msgid "Download wp-config.php"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:313
+msgid "Download WordPress configuration file."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:323
+msgid "Download .htaccess"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:324
+msgid "Download Apache configuration file."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:334
+msgid "Delete Backup"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:335
+msgid "Permanently delete this backup."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:349
+#: inc/admin/settings/settings-main-page.php:75
+#, php-format
+msgid ""
+"If something isn't clear, please open a ticket on the official plugin %1$s. "
+"We aim to address all tickets within a few working days."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:352
+#: inc/admin/settings/settings-main-page.php:78
+msgid "Support Forum"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:357
+#: inc/admin/settings/settings-main-page.php:83
+msgid "Please rate us"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:363
+#: inc/admin/settings/settings-main-page.php:89
+msgid "Having issues?"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:365
+#: inc/admin/settings/settings-main-page.php:91
+msgid "Create a Support Ticket"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:369
+#: inc/admin/settings/settings-main-page.php:95
+msgid "Developed by"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:371
+#: inc/admin/settings/settings-main-page.php:97
+msgid "Krasen Slavov @ Developry"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:382
+#: inc/admin/settings/settings-main-page.php:108
+#, php-format
+msgid ""
+"* For the price of a cup of coffee per month, you can %1$s for the "
+"development and maintenance of all my free WordPress plugins. Every "
+"contribution helps and is deeply appreciated!"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-main-page.php:385
+#: inc/admin/settings/settings-main-page.php:111
+msgid "help and support me on Patreon"
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-page.php:22
+#: inc/admin/settings/settings-page.php:22
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: inc/admin/manage-backups/manage-backups-progress.php:44
+msgid "Invalid UUID."
+msgstr ""
+
+#: inc/admin/manage-backups/restore-preview.php:43
+msgid "Invalid backup UUID."
+msgstr ""
+
+#: inc/admin/manage-backups/restore-preview.php:55
+msgid "Backup validation failed."
+msgstr ""
+
+#: inc/admin/manage-backups/secure-download.php:28
+#: inc/admin/settings/settings-actions.php:25
+#: inc/library/events/class-bkpc-create-backup.php:66
+#: inc/library/events/class-bkpc-delete-backup.php:53
+#: inc/library/events/class-bkpc-upload-backup.php:59
+msgid "Security check failed!"
+msgstr ""
+
+#: inc/admin/manage-backups/secure-download.php:33
+#: inc/admin/settings/settings-actions.php:35
+#: inc/library/events/class-bkpc-create-backup.php:70
+#: inc/library/events/class-bkpc-delete-backup.php:58
+#: inc/library/events/class-bkpc-upload-backup.php:64
+msgid "Insufficient permissions!"
+msgstr ""
+
+#: inc/admin/manage-backups/secure-download.php:38
+msgid "File parameter missing!"
+msgstr ""
+
+#: inc/admin/manage-backups/secure-download.php:48
+msgid "Invalid file path!"
+msgstr ""
+
+#: inc/admin/manage-backups/secure-download.php:53
+msgid "File not found!"
+msgstr ""
+
+#: inc/admin/requirements/action-links.php:20
+msgid "Managa Backups"
+msgstr ""
+
+#: inc/admin/requirements/action-links.php:35
+msgid "Documentation"
+msgstr ""
+
+#: inc/admin/requirements/check-requirements.php:29
+#, php-format
+msgid ""
+"%1$s requires PHP version %2$s or greater. You are currently running version "
+"%3$s."
+msgstr ""
+
+#: inc/admin/requirements/check-requirements.php:49
+#, php-format
+msgid ""
+"%1$s requires WordPress version %2$s or greater. You are currently running "
+"version %3$s."
+msgstr ""
+
+#: inc/admin/requirements/dashboard-widget.php:44
+msgid "Create, restore, and manage your WordPress database backups with ease."
+msgstr ""
+
+#: inc/admin/requirements/dashboard-widget.php:51
+msgid "Total Backup Size"
+msgstr ""
+
+#: inc/admin/requirements/dashboard-widget.php:58
+msgid "Recent Full Backups"
+msgstr ""
+
+#: inc/admin/requirements/dashboard-widget.php:64
+msgid "Latest Backups"
+msgstr ""
+
+#: inc/admin/requirements/dashboard-widget.php:90
+#: inc/library/class-bkpc-admin.php:115
+#: inc/library/core/class-bkpc-view.php:460
+msgid "Support"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:72
+msgid "Processing..."
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:73
+msgid "Success!"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:74
+msgid "Error occurred"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:75
+msgid "Are you sure?"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:76
+msgid "Are you sure you want to delete this backup?"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:77
+msgid "Are you sure you want to restore this backup?"
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:78
+msgid "Creating backup..."
+msgstr ""
+
+#: inc/admin/requirements/enqueue-assets.php:79
+msgid "Downloading backup..."
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:39
+#: inc/admin/requirements/wp-pointers.php:56
+msgid "Welcome to Backup Copilot!"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:44
+msgid ""
+"Thank you for installing Backup Copilot. Get started with these quick "
+"actions:"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:47
+msgid "Create your first database backup"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:48
+msgid "Export backups for safe storage"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:49
+msgid "Restore backups with one click"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:50
+msgid "Upload backups from other sites"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:58
+msgid "Create First Backup"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:66
+msgid "View Documentation"
+msgstr ""
+
+#: inc/admin/requirements/notice-onboarding.php:73
+msgid "Dismiss"
+msgstr ""
+
+#: inc/admin/requirements/notice-rating.php:48
+#, php-format
+msgid "✨💪🔌 Could you kindly support the plugin by %1$s? Thank you in advance!"
+msgstr ""
+
+#: inc/admin/requirements/notice-rating.php:51
+msgid "by giving it 5 stars rating"
+msgstr ""
+
+#: inc/admin/requirements/notice-rating.php:57
+msgid "Rate us @ WordPress.org"
+msgstr ""
+
+#: inc/admin/requirements/notice-rating.php:61
+#: inc/admin/requirements/pro-plugin.php:91
+msgid "I already did"
+msgstr ""
+
+#: inc/admin/requirements/notice-rating.php:64
+#: inc/admin/requirements/pro-plugin.php:94
+msgid "Don't show this notice again!"
+msgstr ""
+
+#: inc/admin/requirements/pro-plugin.php:69
+msgid "Backup Copilot PRO 🚀"
+msgstr ""
+
+#: inc/admin/requirements/pro-plugin.php:77
+#, php-format
+msgid "✨🎉📢 %1$s? Discover the added benefits of upgrading to %2$s?"
+msgstr ""
+
+#: inc/admin/requirements/pro-plugin.php:80
+msgid "Found the free version helpful"
+msgstr ""
+
+#: inc/admin/requirements/pro-plugin.php:87
+msgid "Go Pro"
+msgstr ""
+
+#: inc/admin/requirements/user-profile.php:33
+msgid "Access Control"
+msgstr ""
+
+#: inc/admin/requirements/user-profile.php:44
+msgid "Allow this user to access Backup Copilot"
+msgstr ""
+
+#: inc/admin/requirements/wp-pointers.php:59
+#, php-format
+msgid ""
+"%1$s Click here to create your first database backup, restore previous "
+"backups, or manage all your backup files."
+msgstr ""
+
+#: inc/admin/requirements/wp-pointers.php:60
+msgid "Quick Start:"
+msgstr ""
+
+#: inc/admin/requirements/wp-pointers.php:116
+msgid "Pointer dismissed successfully!"
+msgstr ""
+
+#: inc/admin/settings/compact-mode.php:38
+msgid "Compact mode moves the plugin access link under Tools."
+msgstr ""
+
+#: inc/admin/settings/compact-mode.php:66
+msgid "Compact mode option was updated successfully."
+msgstr ""
+
+#: inc/admin/settings/settings-actions.php:47
+msgid "All options have been reset to their default values."
+msgstr ""
+
+#: inc/admin/settings/settings-main-page.php:29
+#, php-format
+msgid ""
+"%1$s: Make sure to click the \"%2$s\" button below after updating any "
+"options."
+msgstr ""
+
+#: inc/admin/settings/settings-main-page.php:30
+msgid "Important"
+msgstr ""
+
+#: inc/admin/settings/settings-main-page.php:62
+msgid "Reset"
+msgstr ""
+
+#: inc/admin/settings/settings-page.php:36
+msgid "Compact Mode"
+msgstr ""
+
+#: inc/library/class-bkpc-admin.php:112
+#, php-format
+msgid "%1$s! Contact us @ %2$s."
+msgstr ""
+
+#: inc/library/class-bkpc-admin.php:114
+msgid "Invalid security token"
+msgstr ""
+
+#: inc/library/class-bkpc-admin.php:133
+#, php-format
+msgid ""
+"%1$s! The current user lacks the required capabilities to access this "
+"function."
+msgstr ""
+
+#: inc/library/class-bkpc-admin.php:134
+msgid "Access denied"
+msgstr ""
+
+#: inc/library/core/class-bkpc-db.php:31
+msgid "Database credentials not loaded"
+msgstr ""
+
+#: inc/library/core/class-bkpc-db.php:92
+msgid "SQL file was not created or is empty"
+msgstr ""
+
+#: inc/library/core/class-bkpc-db.php:109
+#, php-format
+msgid "Database backup failed: %s"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:37
+msgid ""
+"Quickly and easily create backup points of your WordPress installation to "
+"restore, export, or transfer to another location."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:38
+msgid "Maximum backup size:"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:57
+msgid ""
+"* Backup Export will only generate backup for download and doesn't save any "
+"files on your server."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:83
+msgid ".htaccess and wp-config.php files can be saved only for Create Export."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:93
+msgid "Find text..."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:94
+msgid "Replace with text..."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:97
+msgid "Add another find and replace text group..."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:175
+msgid ""
+"* You can only restore from full backup files. (e.g. file name 1639558327."
+"zip)"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:206
+msgid ""
+"* Hold your mouse over each icon to view full description for the action."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:207
+msgid ""
+"** Backups with delete and download full backup buttons are copies of your "
+"exports you can either delete them or they will be overwritten when/if you "
+"import the same backup."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:214
+msgid "Created"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:248
+msgid "No backups found!"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:467
+#, php-format
+msgid "Go to your %1$s page and click the %2$s button."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:468
+msgid "Site Health Info"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:469
+msgid "Copy Site Info to Clipboard"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:477
+#, php-format
+msgid ""
+"Go to the Copilot Plus %1$s page and send us a message with the Site Health "
+"Info contents included."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:478
+msgid "Contact Us"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:486
+#, php-format
+msgid ""
+"Or search and create a support ticket at the plugin %1$s page directly at WP."
+"org."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:487
+msgid "Support Tab"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:493
+msgid ""
+"DON'T POST YOUR SITE HEALTH INFO CONTENTS ONTO THE PUBLIC PLUGIN FORUMS!"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:497
+msgid "Configuration"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:502
+msgid "Create archive files."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:507
+msgid "Database constants not defined"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:514
+msgid "Cannot connect to database"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:521
+msgid "Connect to database."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:524
+msgid "Base path permissions."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:527
+msgid "Content path permissions."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:531
+msgid "Maximum upload file size"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:532
+msgid "Maximum post file size."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:533
+msgid "Memory limit."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:534
+msgid "Maximum execution time."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:535
+msgid "Maximum input time."
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:546
+msgid "Maximum backup size: 500MB"
+msgstr ""
+
+#: inc/library/core/class-bkpc-view.php:547
+msgid ""
+"Server timeout may occur on hosting providers with restrictions (e.g. "
+"WPEngine) and may cause corrupted backup files for sites with data over 1GB."
+msgstr ""
+
+#: inc/library/events/class-bkpc-create-backup.php:164
+msgid "New backup point was created successfully!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-create-backup.php:189
+msgid "New backup point failed! You are over the maximum backup limit size!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-delete-backup.php:80
+msgid "Backup point was deleted successfully!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:41
+#, php-format
+msgid "Database backup: %s"
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:46
+msgid "No database backup found. Only files will be restored."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:58
+#, php-format
+msgid "Files backup: %s"
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:63
+msgid "No files backup found. Only database will be restored."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:69
+msgid "No valid backup files found."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:147
+msgid "SQL file is empty."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:155
+msgid "Unable to read SQL file."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:174
+msgid "SQL file does not contain valid SQL statements."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:191
+msgid "ZipArchive extension not available."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:202
+msgid "Not a valid ZIP archive."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:205
+msgid "ZIP archive is inconsistent or corrupted."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:208
+msgid "ZIP archive CRC error."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:211
+msgid "Unable to open ZIP file."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:245
+msgid "Unable to determine available disk space."
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:250
+#, php-format
+msgid "Insufficient disk space. Required: %1$s, Available: %2$s"
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:257
+#, php-format
+msgid "Available disk space: %s"
+msgstr ""
+
+#: inc/library/events/class-bkpc-restore-validator.php:290
+#, php-format
+msgid "The following directories are not writable: %s"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:70
+msgid "No file uploaded!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:83
+msgid "Invalid file type! Only ZIP files are allowed."
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:102
+msgid "Invalid backup filename format! Use {uuid}.zip or download-{uuid}.zip"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:109
+msgid "Backup point upload failed! You are over the maximum backup limit size!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:129
+msgid "Nothing is uploaded. Backup point already exists!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:155
+msgid "Unzip failed! Double check if zip file is not corrupted!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:175
+msgid "Failed to copy backup file!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:191
+msgid "Backup point was uploaded successfully!"
+msgstr ""
+
+#: inc/library/events/class-bkpc-upload-backup.php:193
+msgid "Backup point upload failed! Invalid file or archive type!"
+msgstr ""

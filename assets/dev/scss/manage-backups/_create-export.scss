@@ -1,0 +1,88 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-advanced-options-toggle {
+	display: block;
+	font-size: $font-size-sm;
+	font-weight: $font-weight-bold;
+	margin-bottom: $spacing-md;
+	text-decoration: none;
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	.dashicons {
+		height: 15px;
+		width: 15px;
+	}
+}
+
+.bkpc-add-find-replace-row {
+	font-size: $font-size-sm;
+	font-weight: $font-weight-bold;
+	text-decoration: none;
+
+	.dashicons {
+		font-size: $font-size-sm;
+		line-height: 1.9;
+	}
+}
+
+.bkpc-remove-find-replace-row {
+	color: $color-red;
+	display: inline-block;
+	font-size: $font-size-sm;
+	font-weight: $font-weight-bold;
+	margin-left: $spacing-md;
+	text-decoration: none;
+
+	&:hover {
+		color: color.adjust($color-red, $lightness: -10%);
+	}
+}
+
+.bkpc-progressbar {
+	background: $color-blue;
+	height: 6px;
+	left: 160px;
+	position: absolute;
+	top: 32px;
+	transition: width $transition-default;
+	width: 0;
+	z-index: 9;
+}
+
+.bkpc-advanced-options {
+	display: none;
+	margin-bottom: $spacing-lg;
+	margin-left: $spacing-lg;
+
+	.find-and-replace-string {
+		margin: $spacing-md 0;
+	}
+
+	input[type='text'] {
+		max-width: 160px;
+	}
+
+	input[type='checkbox'][readonly] {
+		cursor: not-allowed;
+		opacity: 0.25;
+	}
+
+	input[disabled] {
+		cursor: not-allowed;
+	}
+
+	label {
+		display: block;
+		margin: $spacing-md 0;
+
+		input[type='checkbox'] {
+			position: relative;
+			top: 1px;
+		}
+	}
+}

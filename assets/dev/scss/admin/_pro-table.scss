@@ -1,0 +1,75 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-admin {
+	.bkpc-pro {
+		background-color: $color-white;
+		border-radius: $border-radius;
+		float: left;
+		margin: 0 0 $spacing-lg 0;
+		max-width: 420px;
+		padding: $spacing-sm $spacing-lg;
+
+		@media (max-width: $breakpoint-desktop) {
+			float: none;
+			margin-left: 0;
+			max-width: 100%;
+		}
+
+		h4 {
+			font-size: $font-size-lg;
+			margin: $spacing-md 0;
+		}
+
+		table {
+			background-color: $color-primary;
+			border-collapse: collapse;
+			border-radius: $border-radius;
+			margin: $spacing-md 0;
+			text-align: center;
+			width: 100%;
+
+			th, td {
+				border-bottom: $border-width-sm solid rgba($color-white-alt, 0.1);
+				border-collapse: collapse;
+				border-radius: $border-radius;
+				color: $color-white-alt;
+				font-size: $font-size-sm;
+				padding: $spacing-sm;
+			}
+
+			th {
+				background-color: $color-black;
+				font-size: $font-size-md;
+			}
+		}
+
+		.button-pro {
+			background-color: $color-primary;
+			border-color: rgba($color-black, 0.15);
+			color: $color-white-alt;
+			font-size: $font-size-lg;
+			font-weight: $font-weight-bold;
+			line-height: 38px;
+		}
+
+		.button-watch-video {
+			background-color: $color-light-grey;
+			border-color: rgba($color-black, 0.15);
+			color: color.adjust($color-black, $lightness: 12%);
+			font-size: $font-size-sm;
+			left: -2px;
+			line-height: 38px;
+			position: relative;
+			top: -2px;
+		}
+	}
+}
+
+.bkpc-upgrade  {
+	a {
+		color: $color-green;
+		display: inline-block;
+		font-weight: $font-weight-bold;
+	}
+}

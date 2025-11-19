@@ -1,0 +1,23 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-manage-backups-wrapper {
+	display: flex;
+	gap: $spacing-md;
+
+	@media (max-width: $breakpoint-desktop) {
+		flex-direction: column;
+	}
+
+	.bkpc-timer {
+		color: $color-red;
+		font-weight: $font-weight-bold;
+		margin-left: $spacing-sm;
+	}
+
+	textarea {
+		max-width: 100%;
+		padding: $spacing-xs $spacing-sm;
+		width: 100%;
+	}
+}

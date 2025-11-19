@@ -1,0 +1,41 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+@use './wrapper';
+@use './create-export';
+@use './import';
+@use './backups';
+@use './sidebar';
+@use './danger-zone';
+@use './drawer-toggle';
+@use './restore-preview';
+@use './actions-legend';
+
+.bkpc-manage-backups-main {
+	flex: 0 0 960px;
+	
+	@media (max-width: $breakpoint-desktop) {
+		flex: 0 0 100%;
+	}
+
+	form {
+		float: none;
+		width: 100%;
+	}
+
+	table {
+		width: 100%;
+	}
+}
+
+.bkpc-manage-backups-sidebar {
+	flex: 0 0 420px;
+
+	@media (max-width: $breakpoint-desktop) {
+		flex: 0 0 100%;
+	}
+
+	h3 {
+		margin-bottom: 0;
+	}
+}

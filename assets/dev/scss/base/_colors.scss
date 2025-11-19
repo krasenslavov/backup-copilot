@@ -1,0 +1,93 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin text-colors {
+	&-black {
+		color: $color-black;
+	}
+
+	&-white {
+		color: $color-white;
+	}
+
+	&-white-alt {
+		color: $color-white-alt;
+	}
+
+	&-light-grey {
+		color: $color-light-grey;
+	}
+
+	&-dark-grey {
+		color: $color-dark-grey;
+	}
+
+	&-primary,
+	&-blue {
+		color: $color-blue;
+	}
+
+	&-red {
+		color: $color-red;
+	}
+
+	&-green {
+		color: $color-green;
+	}
+
+	&-orange {
+		color: $color-orange;
+	}
+}
+
+@mixin bg-colors {
+	&-black {
+		background-color: $color-black;
+	}
+
+	&-white {
+		background-color: $color-white;
+	}
+
+	&-white-alt {
+		background-color: $color-white-alt;
+	}
+
+	&-light-grey {
+		background-color: $color-light-grey;
+	}
+
+	&-dark-grey {
+		background-color: $color-dark-grey;
+	}
+
+	&-primary,
+	&-blue {
+		background-color: $color-blue;
+	}
+
+	&-red {
+		background-color: $color-red;
+	}
+
+	&-green {
+		background-color: $color-green;
+	}
+
+	&-orange {
+		background-color: $color-orange;
+	}
+}
+
+
+.bkpc-admin {
+	&.text-color,
+	.text-color {
+		@include text-colors;
+	}
+
+	&.bg-color,
+	.bg-color {
+		@include bg-colors;
+	}
+}

@@ -1,0 +1,20 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-custom-file-upload {
+	input[type='file'] {
+		display: none;
+	}
+
+	label {
+		background-color: $color-light-grey;
+		border: $border-width-sm solid $color-border-dark;
+		border-radius: $border-radius;
+		color: $color-black;
+		cursor: pointer;
+		display: inline-block;
+		font-size: $font-size-sm;
+		padding: $spacing-xs $spacing-sm;
+		width: calc(100% - $spacing-lg);
+	}
+}

@@ -1,0 +1,72 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-actions-legend {
+	display: grid;
+	gap: $spacing-md;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	padding: 0;
+
+	.bkpc-legend-item {
+		align-items: center;
+		background-color: $color-white;
+		border: $border-width-sm solid $color-light-grey;
+		border-radius: $border-radius;
+		display: flex;
+		gap: $spacing-md;
+		padding: $spacing-md;
+		transition: border-color $transition-default;
+
+		&:hover {
+			border-color: $color-light-grey;
+			cursor: pointer;
+			
+			.button {
+				color: $color-white !important;
+			}
+
+			// Primary buttons (blue)
+			.button-primary:not(.button-red):not(.button-black) {
+				background: $color-blue !important;
+				border-color: $color-blue !important;
+			}
+
+			// Red buttons
+			.button-red {
+				background: $color-red !important;
+				border-color: $color-red !important;
+			}
+
+			// Black buttons
+			.button-black {
+				background: $color-black !important;
+				border-color: $color-black !important;
+			}
+		}
+
+		.bkpc-legend-icon {
+			flex-shrink: 0;
+
+			.button {
+				border-radius: $border-radius-round;
+				cursor: pointer;
+				height: 30px;
+				opacity: 1;
+				transition: background-color $transition-default, border-color $transition-default;
+				width: 30px;
+			}
+		}
+
+		.bkpc-legend-text {
+			flex: 1;
+			font-size: $font-size-sm;
+			line-height: 1.6;
+
+			strong {
+				display: block;
+				font-size: $font-size-sm;
+				margin-bottom: $spacing-xs;
+			}
+		}
+	}
+}

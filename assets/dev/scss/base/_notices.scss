@@ -1,0 +1,184 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.bkpc-rating-notice,
+.bkpc-onboarding-notice,
+.bkpc-notice-error,
+.bkpc-notice-success,
+.bkpc-export-notification-notice,
+.notice-success,
+.notice-error {
+	background-color: $color-white;
+	border: $border-width-sm solid color.adjust($color-light-grey, $lightness: -7%);
+	border-left: $border-width-sm-md solid $color-blue;
+	margin: $spacing-lg $spacing-md 0 0;
+	padding: $spacing-md;
+
+	h2 {
+		align-items: center;
+		display: flex;
+		gap: $spacing-sm;
+		margin: 0 0 $spacing-md 0;
+	}
+
+	.dashicons-yes-alt {
+		color: $color-green;
+	}
+}
+
+.bkpc-notice-container,
+.notice {
+	display: none;
+
+	&.bkpc-notice-container-active,
+	&.is-dismissible {
+		display: block;
+		margin-bottom: $spacing-sm;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+.bkpc-notice-error,
+.notice-error {
+	border-left-color: $color-red;
+}
+
+.bkpc-notice-success,
+.notice-success {
+	border-left-color: $color-green;
+}
+
+// Export Notification
+.bkpc-export-notification-notice {
+	border-left-color: $color-green;
+	margin: $spacing-sm 0;
+	padding: $spacing-sm $spacing-lg $spacing-xs $spacing-lg;
+
+	.button {
+		margin-top: $spacing-sm;
+	}
+}
+
+.bkpc-onboarding-list {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacing-xs;
+	margin: 0 0 $spacing-sm 0 !important;
+	padding: 0 !important;
+
+	li {
+		background-color: $color-white-alt;
+		flex: 0 0 calc(50% - $spacing-xs - $spacing-sm * 2);
+		list-style-type: none !important;
+		margin: 0;
+		padding: $spacing-sm;
+	}
+}
+
+// Toast notifications
+.bkpc-toast-container {
+	max-width: 360px;
+	pointer-events: none;
+	position: fixed;
+	right: $spacing-lg;
+	top: 52px;
+	z-index: 999999;
+}
+
+.bkpc-toast {
+	animation: bkpcToastSlideIn 0.3s ease-out;
+	background-color: $color-white;
+	border: $border-width-sm solid color.adjust($color-light-grey, $lightness: -7%);
+	border-left: $border-width-sm-md solid $color-blue;
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-sm;
+	margin-bottom: $spacing-sm;
+	padding: $spacing-md;
+	pointer-events: auto;
+	position: relative;
+
+	&.bkpc-toast-success {
+		border-left-color: $color-green;
+	}
+
+	&.bkpc-toast-error {
+		border-left-color: $color-red;
+	}
+
+	&.bkpc-toast-info {
+		border-left-color: $color-blue;
+	}
+
+	// Progress toast variant (persistent, no auto-dismiss)
+	&.bkpc-toast-progress {
+		background-color: color.adjust($color-blue, $lightness: 45%);
+		border-color: $color-blue;
+		max-width: 500px;
+
+		.bkpc-progress-content {
+			color: color.adjust($color-blue, $lightness: -20%);
+			font-size: $font-size-sm;
+			line-height: 1.6;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+		}
+
+		.bkpc-progress-done {
+			color: $color-green;
+			font-weight: $font-weight-bold;
+		}
+	}
+
+	&.bkpc-toast-hiding {
+		animation: bkpcToastSlideOut 0.3s ease-in forwards;
+	}
+
+	p {
+		flex: 1;
+		margin: 0;
+	}
+
+	.bkpc-toast-dismiss {
+		background: none;
+		border: none;
+		color: color.adjust($color-dark-grey, $lightness: 20%);
+		cursor: pointer;
+		font-size: $font-size-md;
+		line-height: 1;
+		padding: 0;
+		position: absolute;
+		right: 1px;
+		top: 1px;
+
+		&:hover {
+			color: $color-dark-grey;
+		}
+	}
+}
+
+@keyframes bkpcToastSlideIn {
+	from {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes bkpcToastSlideOut {
+	from {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+}

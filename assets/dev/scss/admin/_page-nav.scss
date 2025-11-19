@@ -1,0 +1,40 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-admin {
+	.bkpc-page-nav {
+		border-bottom: $border-width-sm solid color.adjust($color-light-grey, $lightness: -10%);
+		display: flex;
+		margin: $spacing-lg 0;
+
+		.dashicons-warning {
+			color: $color-red;
+		}
+
+		a {
+			background-color: color.adjust($color-light-grey, $lightness: -3%);
+			border: $border-width-sm solid color.adjust($color-light-grey, $lightness: -10%);
+			border-bottom: 0;
+			color: color.adjust($color-dark-grey, $lightness: 10%);
+			font-size: $font-size-md;
+			font-weight: $font-weight-bold;
+			margin: 0 0 0 $spacing-sm;
+			padding: $spacing-sm $spacing-md;
+			text-decoration: none;
+
+			&:hover,
+			&:active,
+			&:focus {
+				background-color: $color-white;
+			}
+
+			&.current {
+				background-color: $color-white-alt;
+				border-bottom: $border-width-sm solid transparent;
+				color: $color-black;
+				position: relative;
+				top: 1px;
+			}
+		}
+	}
+}

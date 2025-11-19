@@ -1,0 +1,41 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.bkpc-admin {
+	.button-group {
+		.button {
+			align-items: center;
+			display: inline-flex;
+			gap: $spacing-xs;
+			justify-content: center;
+			padding: 0 $spacing-md;
+
+			&:last-of-type {
+				border-left: 1px solid rgba($color-black, 0.2);
+			}
+
+			.dashicons {
+				font-size: $font-size-md;
+				height: 18px;
+				line-height: 1.2;
+				width: 18px;
+			}
+		}
+	}
+
+	button[type='submit'],
+	.button {
+		align-items: center;
+		display: inline-flex;
+		gap: $spacing-xs;
+		justify-content: center;
+		padding: 0 $spacing-md;
+
+		.dashicons {
+			font-size: $font-size-md;
+			height: 18px;
+			line-height: 1.2;
+			width: 18px;
+		}
+	}
+}

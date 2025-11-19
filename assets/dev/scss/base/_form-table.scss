@@ -1,0 +1,43 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.bkpc-admin {
+	table {
+		h2 {
+			font-size: $font-size-lg;
+			font-weight: $font-weight-bold;
+			padding: 0;
+		}
+
+		th {
+			background-color: $color-light-grey;
+			border-bottom: $border-width-sm solid color.adjust($color-light-grey, $lightness: -2%);
+			font-size: $font-size-sm;
+			padding: $spacing-lg;
+			text-transform: uppercase;
+			width: 200px;
+		}
+
+		td {
+			vertical-align: bottom !important;
+
+			p {
+				align-items: center;
+				display: flex;
+				flex-wrap: wrap;
+				margin: $spacing-xs 0;
+			}
+		}
+
+		th, 
+		td {
+			small {
+				display: block;
+				font-size: $font-size-sm;
+				font-weight: $font-weight-normal;
+				margin: $spacing-xs 0;
+				text-transform: none;
+			}
+		}
+	}
+}

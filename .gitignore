@@ -1,0 +1,60 @@
+# Node.js
+node_modules/
+
+# Output of 'npm pack'
+*.tgz
+
+# Visual Studio Code
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+jspm_packages/
+
+# Optional - if you're using Yarn package manager
+yarn-error.log
+
+# Environment variables file
+.env
+
+# IDE-specific files
+.idea/
+*.iml
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# JetBrains
+.idea/
+
+# Sublime Text
+.sublime-project
+.sublime-workspace
+
+# Webpack
+/dist
+/node_modules
+
+# Log files
+*.log
+
+# Optional - if you're using ESLint
+.eslintcache
+
+# LLMs
+.claude/
+CLAUDE.md
+CLAUDE-MAINTENANCE.md

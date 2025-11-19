@@ -1,0 +1,50 @@
+@use 'sass:color';
+
+$color-primary: #252525;
+$color-black: #1a1c1e;
+$color-white: #ffffff;
+$color-white-alt: #f0f0f1;
+$color-red: #93003c;
+$color-green: #39b54a;
+$color-blue: #2271b1;
+$color-orange: #ffa500;
+$color-light-grey: #e0e1e3;
+$color-dark-grey: #222325;
+
+
+// Border Colors
+$color-border: #dcdcde;
+$color-border-dark: #8c8f94;
+
+// Font Sizes
+$font-size-xs: 11px;
+$font-size-sm: 13px;
+$font-size-md: 15px;
+$font-size-lg: 17px;
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+
+// Spacing
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 15px;
+$spacing-lg: 20px;
+
+// Border Widths
+$border-width-sm: 1px;
+$border-width-sm-md: 3px;
+$border-width-sm-lg: 5px;
+
+// Border Radius
+$border-radius: 4px;
+$border-radius-round: 50%;
+
+// Transitions
+$transition-default: ease 400ms;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;

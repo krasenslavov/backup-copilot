@@ -1,0 +1,45 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+// Drawer/Collapsible Sections
+.bkpc-drawer-toggle {
+	cursor: pointer;
+	position: relative;
+	transition: background-color $transition-default;
+	user-select: none;
+
+	&:hover {
+		background-color: color.adjust($color-light-grey, $lightness: 10%);
+	}
+
+	.bkpc-drawer-icon {
+		position: absolute;
+		right: 10px;
+		top: 15px;
+		transition: transform $transition-default;
+	}
+
+	&.bkpc-drawer-active {
+		.bkpc-drawer-icon {
+			transform: rotate(0deg);
+		}
+	}
+
+	&:not(.bkpc-drawer-active) {
+		.bkpc-drawer-icon {
+			transform: rotate(-90deg);
+		}
+	}
+}
+
+.bkpc-drawer-content {
+	max-height: 0;
+	overflow: hidden;
+	padding: 0 $spacing-sm;
+	transition: max-height $transition-default;
+
+	&.bkpc-drawer-open {
+		max-height: 10000px;
+		transition: max-height $transition-default;
+	}
+}

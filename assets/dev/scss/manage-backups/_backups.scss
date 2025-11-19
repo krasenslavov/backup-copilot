@@ -1,0 +1,197 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+.bkpc-manage-backups-container {
+	max-height: 768px;
+	max-width: 1024px;
+	min-width: 100%;
+	overflow: auto;
+
+	table {
+		margin-bottom: $spacing-xs;
+		
+		tr {
+			background-color: $color-white;
+			border-top: $border-width-sm solid $color-light-grey;
+
+			&:nth-child(even) {
+				background-color: $color-white-alt;
+			}
+
+			&:hover {
+				background-color: $color-light-grey;
+			}
+			
+			th, td {
+				&:nth-child(1) {
+					text-align: center;
+					width: 40px;
+				}
+
+				&:nth-child(4),
+				&:nth-child(5) {
+					text-wrap: nowrap;
+
+					abbr {
+						display: inline-block;
+						line-height: 1;
+						position: relative;
+						top: -8px;
+					}
+				}
+			}
+
+			th {
+				background-color: $color-light-grey;
+				padding: $spacing-md;
+				text-wrap: nowrap;
+			}
+			
+			td {
+				padding: $spacing-md $spacing-xs;
+				text-align: center;
+			}
+		}
+	}
+
+	.button {
+		cursor: pointer;
+
+		&.button-rounded {
+			border-radius: $border-radius-round;
+			height: 30px;
+			width: 30px;
+
+			&:disabled,
+			&[disabled] {
+				background: $color-light-grey !important;
+				border-color: $color-dark-grey !important;
+				color: $color-dark-grey !important;
+				cursor: not-allowed;
+				opacity: 0.6;
+
+				&:hover {
+					background: $color-light-grey !important;
+					border-color: $color-dark-grey !important;
+				}
+			}
+		}
+
+		&.button-red {
+			background: $color-red !important;
+			border-color: $color-red !important;
+
+			&:hover,
+			&:active {
+				background: $color-red !important;
+				border-color: $color-red !important;
+			}
+		}
+
+		&.button-black {
+			background: $color-black !important;
+			border-color: $color-black !important;
+
+			&:hover,
+			&:active {
+				background: $color-black !important;
+				border-color: $color-black !important;
+			}
+		}
+	}
+}
+
+// Backup type labels
+.bkpc-backup-type {
+	align-items: center;
+	border-radius: $border-radius;
+	display: flex;
+	font-size: $font-size-xs;
+	font-weight: $font-weight-bold;
+	justify-content: center;
+	padding: $spacing-xs $spacing-sm;
+	text-transform: uppercase;
+
+	&.bkpc-backup-type-backup {
+		background-color: $color-light-grey;
+		color: $color-blue;
+	}
+
+	&.bkpc-backup-type-export {
+		background-color: #fff4e0;
+		color: $color-orange;
+	}
+
+	&.bkpc-backup-type-safety {
+		background-color: #ffe3e3;
+		color: $color-red;
+	}
+}
+
+// Source badges labels
+.bkpc-source-badge {
+	align-items: center;
+	border-radius: $border-radius;
+	display: flex;
+	font-size: $font-size-xs;
+	font-weight: $font-weight-bold;
+	gap: $spacing-xs;
+	justify-content: center;
+	padding: $spacing-xs $spacing-sm;
+	text-transform: uppercase;
+
+	&.bkpc-source-manual {
+		background-color: #e0f2ff;
+		color: $color-blue;
+	}
+
+	&.bkpc-source-scheduled {
+		background-color: #fff4e0;
+		color: $color-orange;
+	}
+
+	&.bkpc-source-cloud {
+		background-color: #e8f5e9;
+		color: $color-green;
+	}
+}
+
+// Cloud status buttons
+.bkpc-cloud-status {
+	align-items: center;
+	display: flex;
+	gap: $spacing-xs;
+	justify-content: center;
+
+	.bkpc-cloud-provider {
+		align-items: center;
+		border: $border-width-sm solid rgba(0, 0, 0, 0.1);
+		border-radius: $border-radius-round;
+		cursor: help;
+		display: inline-flex;
+		height: 30px;
+		justify-content: center;
+		width: 30px;
+
+		&.bkpc-cloud-synced {
+			background-color: #e8f5e9;
+			color: $color-green;
+		}
+
+		&.bkpc-cloud-pending,
+		&.bkpc-cloud-uploading {
+			background-color: #fff4e0;
+			color: $color-orange;
+		}
+
+		&.bkpc-cloud-failed {
+			background-color: #ffe3e3;
+			color: $color-red;
+		}
+
+		&.bkpc-cloud-none {
+			background-color: $color-light-grey;
+			color: $color-border-dark;
+		}
+	}
+}

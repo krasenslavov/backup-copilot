@@ -1,0 +1,201 @@
+@use 'sass:color';
+@use '../base/variables' as *;
+
+// Spinner animation for loading states
+.bkpc-spin {
+	animation: bkpc-spin 1s linear infinite;
+}
+
+@keyframes bkpc-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+// Restore Preview Modal
+.bkpc-restore-preview-modal {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100000;
+
+	.bkpc-modal-overlay {
+		background: rgba(0, 0, 0, 0.7);
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+	}
+
+	.bkpc-modal-content {
+		background: #fff;
+		border-radius: 8px;
+		display: flex;
+		flex-direction: column;
+		max-height: 80vh;
+		max-width: 600px;
+		opacity: 1;
+		overflow: hidden;
+		position: relative;
+		width: 90%;
+		z-index: 2;
+	}
+
+	.bkpc-modal-header {
+		align-items: center;
+		border-bottom: $border-width-sm solid $color-light-grey;
+		display: flex;
+		justify-content: space-between;
+		padding: $spacing-lg;
+
+		h2 {
+			font-size: $font-size-lg;
+			margin: 0;
+		}
+
+		.bkpc-modal-close {
+			align-items: center;
+			background: none;
+			border: none;
+			color: $color-dark-grey;
+			cursor: pointer;
+			display: flex;
+			font-size: $font-size-lg;
+			height: 30px;
+			justify-content: center;
+			padding: 0;
+			transition: color $transition-default;
+			width: 30px;
+
+			&:hover {
+				background-color: $color-light-grey;
+			}
+		}
+	}
+
+	.bkpc-modal-body {
+		flex: 1;
+		overflow-y: auto;
+		padding: $spacing-lg;
+
+		.bkpc-preview-section {
+			background: $color-white-alt;
+			border-radius: $border-radius;
+			margin-bottom: $spacing-lg;
+			padding: $spacing-md;
+
+			h3 {
+				font-size: $font-size-md;
+				margin: 0 0 $spacing-sm 0;
+			}
+
+			p {
+				margin: $spacing-xs 0;
+			}
+
+			ul {
+				margin: $spacing-xs 0;
+				padding-left: $spacing-lg;
+
+				li {
+					margin: $spacing-xs 0;
+				}
+			}
+
+			&.bkpc-warning {
+				background: color.adjust($color-orange, $lightness: 25%);
+				border-left: $border-width-sm-md  solid $color-orange;
+
+				h3, p, li {
+					color: $color-orange;
+				}
+			}
+
+			&.bkpc-danger {
+				background: $color-white-alt;
+				border-left: $border-width-sm-md solid $color-red;
+
+				h3, p, li {
+					color: $color-red;
+				}
+
+				.bkpc-warning-text {
+					font-weight: $font-weight-bold;
+					margin-top: $spacing-sm;
+				}
+			}
+		}
+
+		.bkpc-info-list {
+			list-style: none;
+			padding-left: 0;
+
+			li {
+				padding: $spacing-xs 0;
+				padding-left: $spacing-md;
+				position: relative;
+
+				&:before {
+					color: $color-green;
+					content: "✓";
+					font-weight: bold;
+					left: 0;
+					position: absolute;
+				}
+			}
+		}
+
+		.bkpc-preview-table {
+			border-collapse: collapse;
+			margin-top: $spacing-sm;
+			width: 100%;
+
+			tr {
+				border-bottom: $border-width-sm solid $color-light-grey;
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+
+			td {
+				padding: $spacing-sm 0;
+
+				&:first-child {
+					font-weight: $font-weight-bold;
+				}
+
+				&:last-child {
+					text-align: right;
+				}
+			}
+		}
+	}
+
+	.bkpc-modal-footer {
+		border-top: $border-width-sm solid $color-light-grey;
+		display: flex;
+		gap: $spacing-sm;
+		justify-content: flex-end;
+		padding: $spacing-md $spacing-lg;
+
+		.button {
+			margin: 0;
+		}
+
+		.bkpc-confirm-restore {
+			background: $color-red;
+			border: $border-width-sm solid rgba(0, 0, 0, 0.1);
+		}
+	}
+}
