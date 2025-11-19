@@ -7,7 +7,7 @@ var $ = jQuery;
 BKPC.deleteAllBackups = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.target);
+	var $button = $(event.target);
 	var $form = $(event.target).closest("form");
 
 	BKPC.showModal({
@@ -34,7 +34,7 @@ BKPC.deleteAllBackups = function (event) {
 					nonce: bkpc.ajaxNonce
 				},
 				beforeSend: function () {
-					BKPC.ajaxBeforeSend($elem);
+					BKPC.ajaxBeforeSend($button);
 				},
 				success: function (response) {
 					if (response.success) {
@@ -44,11 +44,11 @@ BKPC.deleteAllBackups = function (event) {
 							location.reload();
 						}, 2000);
 					} else {
-						BKPC.ajaxError($elem, response.data.message || "Failed to delete backups.");
+						BKPC.ajaxError($button, "Failed to delete backups.");
 					}
 				},
 				error: function (jqxhr, status, error) {
-					BKPC.ajaxError($elem, "Ajax error! Failed to delete all backups.");
+					BKPC.ajaxError($button, "Ajax error! Failed to delete all backups." + error);
 				}
 			});
 		}

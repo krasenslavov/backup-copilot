@@ -7,7 +7,7 @@ var $ = jQuery;
 BKPC.exportBackup = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.target);
+	var $button = $(event.target);
 	var $form = $(event.target).closest("form");
 
 	// Generate a secure UUID before exporting backup
@@ -25,15 +25,11 @@ BKPC.exportBackup = function (event) {
 				replace_with_text: BKPC.getTextFieldArray($("input[name='replace-with-text']"))
 			},
 			beforeSend: function () {
-				BKPC.ajaxBeforeSend($elem);
+				BKPC.ajaxBeforeSend($button);
 			},
-			success: function (data, status, jqxhr) {
-				BKPC.stopTimer($(".bkpc-timer"));
-				BKPC.stopProgressBar($("body"));
-				BKPC.stopProgressNotice();
-
+			success: function (response, status, jqxhr) {
 				// Parse the response
-				var message = JSON.parse(data);
+				var message = response.data;
 
 				// Remove any previous export notifications
 				$(".bkpc-export-notification").remove();
@@ -54,11 +50,11 @@ BKPC.exportBackup = function (event) {
 					});
 				});
 
-				$elem.prop("disabled", false);
+				BKPC.ajaxSuccess($button, message, false);
 				$form.find('textarea[name="notes"]').val("");
 			},
 			error: function (jqxhr, status, error) {
-				BKPC.ajaxError($elem, "Ajax error! Backup export failed.");
+				BKPC.ajaxError($button, "Ajax error! Backup export failed." + error);
 			}
 		});
 	});

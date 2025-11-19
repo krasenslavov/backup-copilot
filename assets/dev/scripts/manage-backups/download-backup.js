@@ -7,7 +7,7 @@ var $ = jQuery;
 BKPC.downloadBackup = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.target);
+	var $button = $(event.target);
 	var $form = $(event.target).closest("form");
 
 	BKPC.setStatus($form.closest("table").find("td"), "wait");
@@ -21,15 +21,15 @@ BKPC.downloadBackup = function (event) {
 			uuid: $form.find("input[name=uuid]").val()
 		},
 		beforeSend: function () {
-			BKPC.ajaxBeforeSend($elem);
+			BKPC.ajaxBeforeSend($button);
 		},
 		success: function (data, status, jqxhr) {
 			BKPC.setStatus($form.closest("table").find("td"), "success");
-			BKPC.ajaxSuccess($elem, data);
+			BKPC.ajaxSuccess($button, data);
 		},
 		error: function (jqxhr, status, error) {
 			BKPC.setStatus($form.closest("table").find("td"), "error");
-			BKPC.ajaxError($elem, "Ajax error! Backup download failed.");
+			BKPC.ajaxError($button, "Ajax error! Backup download failed." + error);
 		}
 	});
 };

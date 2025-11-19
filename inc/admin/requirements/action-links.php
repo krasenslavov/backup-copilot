@@ -17,8 +17,8 @@ namespace DEVRY\BKPC;
  */
 function bkpc_add_action_links( $links, $file_path ) {
 	if ( BKPC_PLUGIN_BASENAME === $file_path ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=' . BKPC_MANAGE_BACKUPS_SLUG ) ) . '">' . esc_html__( 'Managa Backups', 'backup-copilot' ) . '</a>';
-		array_unshift( $links, $settings_link );
+		$manage_backups_link = '<a href="' . esc_url( admin_url( 'admin.php?page=' . BKPC_MANAGE_BACKUPS_SLUG ) ) . '">' . esc_html__( 'Manage Backups', 'backup-copilot' ) . '</a>';
+		array_unshift( $links, $manage_backups_link );
 	}
 
 	return $links;

@@ -6,7 +6,7 @@ Tags: backup, restore, migrate, database backup, export, import, site migration
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -207,6 +207,14 @@ Installing the plugin is straightforward. Contact support if you encounter any i
 5. Review the backup in the "All Backups" section.
 
 == CHANGELOG ==
+
+= 1.1.2 =
+
+**Critical Hotfix - Restore Process**
+
+- **Fixed** - Reverted incorrect multisite path logic that broke restore process in free plugin
+- **Fixed** - Removed PRO-only full backup detection code from FREE plugin restore
+- **Fixed** - Restore now works correctly for all backup types (database + files)
 
 = 1.1.1 =
 
