@@ -7,7 +7,7 @@ var $ = jQuery;
 BKPC.uploadBackup = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.target);
+	var $button = $(event.target);
 	var $form = $(event.target).closest("form");
 	var $form_data = new FormData();
 
@@ -23,14 +23,14 @@ BKPC.uploadBackup = function (event) {
 		processData: false,
 		contentType: false,
 		beforeSend: function () {
-			BKPC.ajaxBeforeSend($elem);
+			BKPC.ajaxBeforeSend($button);
 		},
 		success: function (data, status, jqxhr) {
-			BKPC.ajaxSuccess($elem, data, true);
+			BKPC.ajaxSuccess($button, data);
 			$form.find('input[name="backup-file"]+span').text("Choose Backup File...");
 		},
 		error: function (jqxhr, status, error) {
-			BKPC.ajaxError($elem, "Ajax error! Backup upload failed.");
+			BKPC.ajaxError($button, "Ajax error! Backup upload failed. " + error);
 		}
 	});
 };

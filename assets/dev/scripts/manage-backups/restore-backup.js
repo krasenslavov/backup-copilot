@@ -7,19 +7,19 @@ var $ = jQuery;
 BKPC.initiateRestore = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.currentTarget);
-	var $form = $elem.closest("form");
+	var $button = $(event.currentTarget);
+	var $form = $button.closest("form");
 	var uuid = $form.find("input[name=uuid]").val();
 
 	// Show validation and preview modal (from restore-preview.js)
-	if (typeof BKPC.showRestorePreview === 'function') {
+	if (typeof BKPC.showRestorePreview === "function") {
 		// Create event object with uuid in data attribute
 		var fakeEvent = {
-			preventDefault: function() {},
-			currentTarget: $elem[0]
+			preventDefault: function () {},
+			currentTarget: $button[0]
 		};
 		// Temporarily add data-uuid attribute for the preview function
-		$elem.attr('data-uuid', uuid);
+		$button.attr("data-uuid", uuid);
 		BKPC.showRestorePreview(fakeEvent);
 	} else {
 		// Fallback to old confirmation modal if preview not loaded
@@ -31,8 +31,8 @@ BKPC.initiateRestore = function (event) {
 BKPC.restoreBackup = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.currentTarget);
-	var $form = $elem.closest("form");
+	var $button = $(event.currentTarget);
+	var $form = $button.closest("form");
 
 	// Proceed with restoration
 	BKPC.setStatus($form.closest("table").find("td"), "wait");
@@ -46,16 +46,16 @@ BKPC.restoreBackup = function (event) {
 			uuid: $form.find("input[name=uuid]").val()
 		},
 		beforeSend: function () {
-			BKPC.ajaxBeforeSend($elem);
+			BKPC.ajaxBeforeSend($button);
 			BKPC.startProgressNotice();
 		},
 		success: function (data, status, jqxhr) {
 			BKPC.setStatus($form.closest("table").find("td"), "success");
-			BKPC.ajaxSuccess($elem, data);
+			BKPC.ajaxSuccess($button, data);
 		},
 		error: function (jqxhr, status, error) {
 			BKPC.setStatus($form.closest("table").find("td"), "error");
-			BKPC.ajaxError($elem, "Ajax error! Backup restore failed.");
+			BKPC.ajaxError($button, "Ajax error! Backup restore failed. " + error);
 		}
 	});
 };
@@ -64,7 +64,7 @@ BKPC.restoreBackup = function (event) {
 BKPC.restoreBackupFallback = function (event) {
 	event.preventDefault();
 
-	var $elem = $(event.target);
+	var $button = $(event.target);
 	var $form = $(event.target).closest("form");
 
 	// Show confirmation modal
@@ -80,7 +80,7 @@ BKPC.restoreBackupFallback = function (event) {
 		cancelText: "Cancel",
 		confirmClass: "button-primary button-red",
 		onConfirm: function () {
-			BKPC.restoreBackup({ currentTarget: $elem[0], preventDefault: function() {} });
+			BKPC.restoreBackup({ currentTarget: $button[0], preventDefault: function () {} });
 		},
 		onCancel: function () {
 			// Do nothing, modal will close

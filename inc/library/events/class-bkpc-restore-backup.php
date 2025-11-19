@@ -93,53 +93,44 @@ if ( ! class_exists( 'BKPC_Restore_Backup' ) ) {
 				$this->fs->create_file( $progress_filename, '[Done]', true );
 			}
 
-			// Check if SQL file exists before attempting database restore
-			$sql_filepath = $backup_dir . $uuid . '.sql';
+			try {
+				$this->fs->create_file( $progress_filename, 'Restoring database...', true );
 
-			if ( file_exists( $sql_filepath ) ) {
-				try {
-					$this->fs->create_file( $progress_filename, 'Restoring database...', true );
+				// Parse DB_HOST to handle LocalWP sockets and ports.
+				$db_host = BKPC_DB_HOSTNAME;
+				$port    = null;
+				$socket  = null;
 
-					// Parse DB_HOST to handle LocalWP sockets and ports.
-					$db_host = BKPC_DB_HOSTNAME;
-					$port    = null;
-					$socket  = null;
-
-					// Check if host contains unix socket.
-					if ( strpos( $db_host, ':' ) !== false && strpos( $db_host, '.sock' ) !== false ) {
-						list( $db_host, $socket ) = explode( ':', $db_host, 2 );
-					} elseif ( strpos( $db_host, ':' ) !== false ) {
-						// Check if host contains port.
-						list( $db_host, $port ) = explode( ':', $db_host, 2 );
-					}
-
-					// Build DSN based on connection type.
-					if ( $socket ) {
-						$dsn = 'mysql:unix_socket=' . $socket . ';dbname=' . BKPC_DB_NAME;
-					} else {
-						$dsn = 'mysql:host=' . $db_host;
-						if ( $port ) {
-							$dsn .= ';port=' . $port;
-						}
-						$dsn .= ';dbname=' . BKPC_DB_NAME;
-					}
-
-					$db = new \PDO( $dsn, BKPC_DB_USER, BKPC_DB_PASSWORD ); // phpcs:ignore
-					$db->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION ); // phpcs:ignore
-
-					$sql = file_get_contents( $sql_filepath );
-
-					$db->exec( $sql );
-
-					$this->fs->create_file( $progress_filename, '[Done]', true );
-				} catch ( \PDOException $err ) {
-					echo wp_json_encode( 'MySQL Connection failed: ' . $err->getMessage() );
-					exit;
+				// Check if host contains unix socket.
+				if ( strpos( $db_host, ':' ) !== false && strpos( $db_host, '.sock' ) !== false ) {
+					list( $db_host, $socket ) = explode( ':', $db_host, 2 );
+				} elseif ( strpos( $db_host, ':' ) !== false ) {
+					// Check if host contains port.
+					list( $db_host, $port ) = explode( ':', $db_host, 2 );
 				}
-			} else {
-				// No SQL file - content-only restore
-				$this->fs->create_file( $progress_filename, 'Skipping database restore (content-only backup)...', true );
+
+				// Build DSN based on connection type.
+				if ( $socket ) {
+					$dsn = 'mysql:unix_socket=' . $socket . ';dbname=' . BKPC_DB_NAME;
+				} else {
+					$dsn = 'mysql:host=' . $db_host;
+					if ( $port ) {
+						$dsn .= ';port=' . $port;
+					}
+					$dsn .= ';dbname=' . BKPC_DB_NAME;
+				}
+
+				$db = new \PDO( $dsn, BKPC_DB_USER, BKPC_DB_PASSWORD ); // phpcs:ignore
+				$db->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION ); // phpcs:ignore
+
+				$sql = file_get_contents( $backup_dir . $uuid . '.sql' );
+
+				$db->exec( $sql );
+
 				$this->fs->create_file( $progress_filename, '[Done]', true );
+			} catch ( \PDOException $err ) {
+				echo wp_json_encode( 'MySQL Connection failed: ' . $err->getMessage() );
+				exit;
 			}
 
 			if ( class_exists( 'ZipArchive' ) ) {

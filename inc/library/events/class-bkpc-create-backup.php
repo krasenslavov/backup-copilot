@@ -167,7 +167,7 @@ if ( ! class_exists( 'BKPC_Create_Backup' ) ) {
 
 		public function max_backup_size( $uuid, $path, $delete = false ) {
 			// Maximum backup size: 500MB (defined in main plugin file)
-			$backup_max_size       = BKPC_MAX_BACKUP_SIZE;
+			$backup_max_size       = 500 * 1024 * 1024;
 			$backup_limit_exceeded = false;
 			// With 60% average zip compression ratio
 			// wp-content directory size cannot exceed ~800MB

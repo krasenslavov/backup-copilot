@@ -3,7 +3,7 @@
  * Plugin Name:  Backup Copilot
  * Plugin URI: https://backupcopilotplugin.com
  * Description: Simple and powerful WordPress backup and restore plugin. Backup your database and files, restore with one click, and migrate your site effortlessly.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Krasen Slavov
  * Author URI: https://developry.com/
  * License: GPLv3 or later
@@ -49,7 +49,7 @@ define( __NAMESPACE__ . '\BKPC_MIN_WP_VERSION', '5.0' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_UUID', 'bkpc' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_TEXTDOMAIN', 'backup-copilot-pro' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_NAME', 'Backup Copilot' );
-define( __NAMESPACE__ . '\BKPC_PLUGIN_VERSION', '1.1.1' );
+define( __NAMESPACE__ . '\BKPC_PLUGIN_VERSION', '1.1.2' );
 define( __NAMESPACE__ . '\BKPC_PLUGIN_DOMAIN', 'https://backupcopilotplugin.com' );
 
 
@@ -78,11 +78,6 @@ define( __NAMESPACE__ . '\BKPC_DB_HOSTNAME', DB_HOST );
 define( __NAMESPACE__ . '\BKPC_DB_NAME', DB_NAME );
 define( __NAMESPACE__ . '\BKPC_DB_USER', DB_USER );
 define( __NAMESPACE__ . '\BKPC_DB_PASSWORD', DB_PASSWORD );
-
-/**
- * Free version limitations
- */
-define( __NAMESPACE__ . '\BKPC_MAX_BACKUP_SIZE', 500 * 1024 * 1024 ); // 500MB limit for free version
 
 /**
  * Allowed HTML for wp_kses sanitization
@@ -126,7 +121,13 @@ if ( 'dev' === BKPC_ENV ) {
  * Load library main classes
  */
 require_once BKPC_PLUGIN_DIR_PATH . 'inc/library/class-bkpc-admin.php';
-require_once BKPC_PLUGIN_DIR_PATH . 'inc/library/class-mysqldump.php';
+
+/**
+ * Load MySQL Dump library
+ */
+if ( ! class_exists( 'Ifsnop\Mysqldump\Mysqldump' ) ) {
+	require_once BKPC_PLUGIN_DIR_PATH . 'inc/library/class-mysqldump.php';
+}
 
 /**
  * Load manage backup core classes
