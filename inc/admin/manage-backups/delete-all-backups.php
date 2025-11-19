@@ -45,9 +45,11 @@ function bkpc_delete_all_backups() {
 		);
 	}
 
-	// Delete all backup directories.
-	$deleted_count = 0;
-	$files         = scandir( $backup_dir );
+	// Delete all backup directories (for current site only in multisite).
+	$deleted_count   = 0;
+	$files           = scandir( $backup_dir );
+	$current_blog_id = is_multisite() ? get_current_blog_id() : null;
+	$mu              = new BKPC_Multisite();
 
 	if ( $files ) {
 		foreach ( $files as $file ) {
@@ -58,8 +60,30 @@ function bkpc_delete_all_backups() {
 			$absolute_path = trailingslashit( $backup_dir ) . $file;
 
 			if ( is_dir( $absolute_path ) && ! is_link( $absolute_path ) ) {
+				// Skip .safety-backup directory.
+				if ( '.safety-backup' === $file ) {
+					continue;
+				}
+
+				// Multisite: Only delete backups belonging to current site.
+				if ( is_multisite() && is_numeric( $file ) ) {
+					$backup_blog_id = $mu->get_mu_option( $file );
+
+					// Skip if backup doesn't have blog ID set.
+					if ( ! $backup_blog_id ) {
+						continue;
+					}
+
+					// Skip if backup belongs to a different site.
+					if ( $current_blog_id !== (int) $backup_blog_id ) {
+						continue;
+					}
+				}
+
 				// Use recursive delete function.
 				if ( bkpc_recursive_delete_directory( $absolute_path ) ) {
+					// Delete multisite option if it exists.
+					$mu->delete_mu_option( $file );
 					$deleted_count++;
 				}
 			} elseif ( is_file( $absolute_path ) ) {
@@ -72,13 +96,24 @@ function bkpc_delete_all_backups() {
 		}
 	}
 
+	// Prepare success message based on multisite context.
+	if ( is_multisite() ) {
+		$message = sprintf(
+			/* translators: %d: number of backups deleted */
+			esc_html__( 'Successfully deleted %d backup(s) for this site.', 'backup-copilot' ),
+			$deleted_count
+		);
+	} else {
+		$message = sprintf(
+			/* translators: %d: number of backups deleted */
+			esc_html__( 'Successfully deleted %d backup(s). The .bkps directory has been cleared.', 'backup-copilot' ),
+			$deleted_count
+		);
+	}
+
 	wp_send_json_success(
 		array(
-			'message' => sprintf(
-				/* translators: %d: number of backups deleted */
-				esc_html__( 'Successfully deleted %d backup(s). The .bkps directory has been cleared.', 'backup-copilot' ),
-				$deleted_count
-			),
+			'message' => $message,
 		)
 	);
 }

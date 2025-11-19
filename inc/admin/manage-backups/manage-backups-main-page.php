@@ -225,6 +225,11 @@ $has_user_cap = $bkpc_admin->check_user_cap();
 							<?php esc_html_e( 'Delete All Backups', 'backup-copilot' ); ?>
 						</button>
 					</form>
+					<?php if ( is_multisite() && 1 === get_current_blog_id() ) : ?>
+						<p>
+							<small>&bullet; <?php esc_html_e( 'Delete all button will only delete backups created on the main site.', 'backup-copilot' ); ?></small>
+						</p>
+					<?php endif; ?>
 				</div>
 			</div>
 			<!-- Actions Legend -->

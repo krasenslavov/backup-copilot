@@ -1057,7 +1057,7 @@ msgstr ""
 #: inc/library/core/class-bkpc-view.php:547
 msgid ""
 "Server timeout may occur on hosting providers with restrictions (e.g. "
-"WPEngine) and may cause corrupted backup files for sites with data over 1GB."
+"WPEngine) and may cause corrupted backup files."
 msgstr ""
 
 #: inc/library/events/class-bkpc-create-backup.php:164

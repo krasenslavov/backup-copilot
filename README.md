@@ -8,7 +8,7 @@ Tags: backup, restore, migrate, database backup, export, import, site migration
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -209,6 +209,41 @@ Installing the plugin is straightforward. Contact support if you encounter any i
 5. Review the backup in the "All Backups" section.
 
 == CHANGELOG ==
+
+= 1.1.1 =
+
+**Multisite Enhancements & Critical Fixes**
+
+- **New** - Network Admin menu with multisite dashicon for WordPress Multisite installations
+- **New** - Site column in backup table showing which site each backup belongs to (main site only)
+- **New** - Read-only mode for main site viewing subsite backups (view-only access)
+- **New** - Backward compatibility for existing backups with automatic migration
+- **New** - Centralized multisite metadata storage in main site options table
+
+- **Improved** - Multisite backup filtering now properly isolates backups per site
+- **Improved** - Backup sorting now shows newest backups first in the table
+- **Improved** - Delete All button now respects site isolation (only deletes own site's backups)
+- **Improved** - Upload process now auto-extracts SQL files from ZIP archives
+- **Improved** - Restore process handles content-only backups gracefully (skips missing SQL)
+- **Improved** - Site column header alignment matches data cells in backup table
+
+- **Fixed** - Main site can now view all subsites' backups (previously only showed own)
+- **Fixed** - Subsite backups now properly filtered and isolated from other sites
+- **Fixed** - Delete All no longer deletes other sites' backups in multisite
+- **Fixed** - Uploaded {uuid}.zip files now restore correctly with SQL extraction
+- **Fixed** - Restore failure when uploading backups without database files
+- **Fixed** - Action buttons (restore/download/delete) now disabled for other sites' backups
+- **Fixed** - Blog ID storage using prefixed option names to avoid UUID collisions
+
+- **Security** - Read-only access prevents main site from modifying subsite backups
+- **Security** - Proper capability checks (manage_network) for network admin access
+- **Security** - Path validation and nonce verification on all multisite operations
+
+- **Developer** - New method: `BKPC_Multisite::get_mu_option()` for reading blog IDs
+- **Developer** - Enhanced `add_mu_option()` uses `switch_to_blog()` for centralized storage
+- **Developer** - Updated `delete_mu_option()` handles both old and new option formats
+- **Developer** - Smart SQL extraction in upload process checks ZIP contents
+- **Developer** - Conditional database restore based on file existence
 
 = 1.1.0 =
 

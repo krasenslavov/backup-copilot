@@ -164,12 +164,35 @@ if ( ! class_exists( 'BKPC_Upload_Backup' ) ) {
 						}
 					}
 				} else {
-					// WP Content backup: Just copy {uuid}.zip to backup directory
+					// WP Content backup: Copy {uuid}.zip and check for SQL file inside
 					$this->progress->add( $uuid, 'Copying wp-content backup...', false );
 					$destination = trailingslashit( $backup_dir ) . $uuid . '.zip';
 
 					if ( copy( $file_path, $destination ) ) {
 						$this->progress->add( $uuid, 'Copying wp-content backup...', true );
+
+						// Check if ZIP contains SQL file and extract it
+						$this->progress->add( $uuid, 'Checking for database file...', false );
+
+						if ( class_exists( 'ZipArchive' ) ) {
+							$zip = new \ZipArchive();
+							$res = $zip->open( $destination );
+
+							if ( true === $res ) {
+								$sql_filename = $uuid . '.sql';
+
+								// Check if SQL file exists in ZIP
+								if ( $zip->locateName( $sql_filename ) !== false ) {
+									// Extract just the SQL file
+									$zip->extractTo( $backup_dir, $sql_filename );
+									$this->progress->add( $uuid, 'Database file extracted...', true );
+								} else {
+									$this->progress->add( $uuid, 'No database file found (content-only backup)...', true );
+								}
+
+								$zip->close();
+							}
+						}
 					} else {
 						$this->delete->delete_backup( $uuid, false );
 						echo wp_json_encode( esc_html__( 'Failed to copy backup file!', 'backup-copilot' ) );
