@@ -1,8 +1,8 @@
-=== Backup Copilot - Simple WordPress Backup & Restore ===
+=== Backup Copilot ===
 
 Contributors: krasenslavov, developry
 Donate Link: https://krasenslavov.com/hire-krasen/
-Tags: backup, restore, migrate, database backup, export, import, site migration
+Tags: backup, restore, migrate, database, site transfer
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
@@ -10,168 +10,116 @@ Stable tag: 1.1.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create, restore, and migrate your WordPress site with one click. Simple backup solution with powerful features for database, files, and complete site transfers.
+Create complete site snapshots with one-click restore and migration tools. Protect database, themes, plugins, and media files.
 
-== DESCRIPTION ==
+== Description ==
 
-**Need a simple yet powerful backup solution for WordPress?**
+Create complete site snapshots including database, themes, plugins, and media files - then restore everything with one click. No cloud accounts or complex configuration required.
 
-[**Backup Copilot**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) helps you protect your WordPress site in these common scenarios:
+https://www.youtube.com/embed/KtPA2o5FJr0
 
-- **Before updates** - Backup before updating WordPress, themes, or plugins
-- **Site migration** - Move your site from localhost to production or between hosts
-- **Development workflow** - Create restore points during active development
-- **Client handoffs** - Transfer WordPress sites between developers
-- **Staging sync** - Clone production to staging for safe testing
-- **Pre-modification safety** - Backup before major site changes
+= Key Features =
 
-The plugin creates complete backup points including database, themes, plugins, and media files - then lets you restore everything with one click.
+* One-click snapshot creation
+* One-click restore functionality
+* Export and import for site migration
+* Full database dumps
+* File system backup
+* No cloud storage required
+* Manual and scheduled options
 
-https://www.youtube.com/embed/t6An3BgI6_k
+= How It Works =
 
-### How it works:
+1. Install and activate
+2. Click Create to save a snapshot
+3. Add optional notes to identify save points
+4. Click Restore to roll back your site
+5. Use Export to download for migration
 
-1. Navigate to **Backup Copilot** in the WordPress admin menu
-2. Click **Create** to save backup on server, or **Export** to download immediately
-3. Add optional notes to identify your backups
-4. Use advanced options to customize what gets backed up
-5. **Restore** any backup point with a single click
-6. **Download** full backup archives for transfers
+Works immediately with sensible defaults that protect your entire installation.
 
-**No complex configuration** - works immediately with sensible defaults that protect your entire site.
+= Use Cases =
 
-== USAGE ==
+* Create safety nets before updates
+* Roll back after failed changes
+* Migrate sites between hosts
+* Transfer from localhost to production
+* Recover from hacking incidents
+* Protect WooCommerce store data
 
-Once the plugin is installed and activated:
+== Installation ==
 
-1. Navigate to **Backup Copilot** in the main menu to open the **Manage Backups** page.
-2. Use the **Create** or **Export** buttons to generate your first backup.
+= From Dashboard =
 
-Here are the steps to use [**Backup Copilot**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt):
+1. Go to Plugins > Add New
+2. Search for "Backup Copilot"
+3. Click Install Now, then Activate
 
-1. **Create Backup** - Saves backup on your server for quick restore
-2. **Export Backup** - Downloads backup immediately to your computer
-3. **Import Backup** - Upload a backup file from another site
-4. **Restore Backup** - Roll back to any backup point with one click
-5. **Download Full Backup** - Generate complete archive for site transfer
-6. **Delete Backup** - Remove old backups to save server space
+= Manual Installation =
 
-**Note:** Backups are stored in a hidden `.bkps` directory. The plugin **does not automatically upload to cloud storage** - this is a PRO feature.
+1. Download the plugin ZIP file
+2. Upload to /wp-content/plugins/
+3. Activate from Plugins menu
 
-== FEATURES & LIMITATIONS ==
+= After Activation =
 
-The [**Backup Copilot**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) plugin allows you to:
+1. Navigate to Backup Copilot in admin menu
+2. Verify system checks show [OK] status
+3. Click Create to make your first snapshot
+4. Add optional notes to identify this point
+5. Test restore process with a test snapshot
 
-- Create complete WordPress backups including database and files
-- Restore your entire site to any previous backup point
-- Export backups for migration to new hosts or domains
-- Import backups from other WordPress installations
-- Download individual components (database .sql, files .zip)
-- Track backup progress in real-time
-- Add notes to identify different backup points
-- View backup size and creation date
-- Customize backup contents with advanced options
+== Frequently Asked Questions ==
 
-### Advanced Options
+= How do I create a site snapshot? =
 
-Customize your backups with granular control:
+Click Backup Copilot in your admin menu, then click the Create button. The plugin saves your database and all files. No configuration needed.
 
-- **Database** - MySQL database dump with all tables
-- **WP-Content** - All themes, plugins, and uploads
-- **Media Library** - wp-content/uploads folder
-- **Themes** - All active and inactive themes
-- **Plugins** - All active and inactive plugins
-- **Must-Use Plugins** - wp-content/mu-plugins
-- **Cache** - wp-content/cache directory
-- **3rd-party Backups** - Other backup plugin files
-- **.htaccess** - Server configuration (export only)
-- **wp-config.php** - WordPress configuration (export only)
-- **Find & Replace URLs** - Update database URLs for migrations (export only)
+= Can I restore my site after a crash? =
 
-### Known Limitations
+Yes, if you created a snapshot before the crash. Go to Manage Backups, find the restore point, and click Restore.
 
-Free version limitations:
+= What files are included? =
 
-- Maximum backup size: **500MB** (optimal for shared hosting)
-- Storage location: Server only (no automatic cloud sync)
-- Scheduling: Manual backups only (no automated scheduling)
-- Retention: Manual deletion only (no automatic cleanup)
-- Email notifications: Not included
-- Emergency rollback: Not included
+Snapshots include your database (MySQL), all themes, all plugins, media library (uploads folder), must-use plugins, and optionally .htaccess and wp-config.php for migration.
 
-== DETAILED DOCUMENTATION ==
+= How do I migrate to a new host? =
 
-Find step-by-step setup guides, usage instructions, demos, videos, and insights on the [**Backup Copilot**](https://backupcopilotplugin.com/help) page.
+On your old site: Click Export to download. On new installation: Install this plugin, click Import, upload the file, and click Restore.
 
-== BACKUP COPILOT PRO ==
+= Does this include the database? =
 
-If you're using the free version from WordPress.org and want Pro features, you can purchase the premium version on the [**Backup Copilot Pro**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) website.
+Yes, complete MySQL database dumps include all tables, posts, pages, custom post types, user accounts, plugin settings, and theme options.
 
-Here are some features included in the Pro version:
+= Where are snapshots stored? =
 
-- **Cloud Storage Integration** - Automatic sync to Dropbox, Google Drive, OneDrive
-- **Automated Scheduling** - Hourly, daily, weekly, monthly backup schedules
-- **Smart Retention Policies** - Age-based, count-based, and size-based auto-delete rules
-- **Email Notifications** - Success and failure alerts with detailed reports
-- **Unlimited Backup Size** - Handle sites of any size with resumable uploads
-- **Pre-Restore Validation** - Verify backup integrity before restoration
-- **Emergency Rollback** - One-click disaster recovery
-- **Find & Replace URLs** - Built-in migration tool for domain changes
-- **Full Multisite Support** - Network-wide and per-site backups
-- **REST API** - Automate backups via API with webhook support
-- **Priority Support** - Direct email and live chat support
+Snapshots are stored in a hidden `.bkps` directory in your root folder. Enable "Show hidden files" in your FTP client to see it. Protected with .htaccess and index.php security files.
 
-== FREQUENTLY ASKED QUESTIONS ==
+= Can I schedule automatic snapshots? =
 
-Visit the [**Support**](https://wordpress.org/support/plugin/backup-copilot/) page to share your questions or requests.
+Automatic scheduling requires the Pro version. Set hourly, daily, weekly, or monthly schedules with automatic cloud storage sync.
 
-We usually respond to tickets within a few days.
+= Does this work with WooCommerce? =
 
-Feature requests are added to our wish list and considered for future updates.
+Yes, all WooCommerce data including products, orders, customers, and settings are included in database snapshots.
 
-### My site crashed after an update. Can this help me recover?
+= Will this slow down my site? =
 
-Yes, if you created a backup before the update. Simply restore the most recent backup point to roll back your site to its previous state. This is why we recommend creating backups before any major changes.
+No, snapshot creation happens in the background. Your site remains fully accessible during the process.
 
-### I'm moving to a new host. How do I use this plugin?
+= Does this support Multisite? =
 
-On your old site: Export a backup. On your new site: Install WordPress and Backup Copilot, then import and restore the backup. The plugin will rebuild your entire site on the new host.
+Yes, Super Admins can save entire networks, Site Admins can save individual sites with site-specific database tables and files.
 
-### How is this different from other backup plugins?
+= What's the maximum snapshot size? =
 
-Backup Copilot focuses on simplicity and reliability. No complex cloud configurations, no confusing scheduling options in the free version - just simple create, restore, and migrate functionality that works every time.
+The free version supports snapshots up to 500MB (optimal for shared hosting). The Pro version removes this limit with resumable uploads.
 
-### Why is there a 500MB backup size limit?
+= Can I use this on localhost? =
 
-This limit ensures backups complete successfully on shared hosting environments with limited resources. Most shared hosts have execution time limits that would cause larger backups to fail. The PRO version removes this limit with resumable uploads.
+Yes, works on localhost installations. Create snapshots locally, then export and import them to your production server for easy migration.
 
-### Are backups deleted when I deactivate the plugin?
-
-No. All backups remain on your server in the `.bkps` directory. Only the "Delete" action permanently removes backup files.
-
-### Can I automate backups without the PRO version?
-
-The free version requires manual backup creation. For automated scheduled backups, email notifications, and cloud storage, check out [**Backup Copilot Pro**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt).
-
-### Is this compatible with WordPress Multisite?
-
-Yes! Full multisite support included. Super Admins can backup entire networks, Site Admins can backup individual sites with site-specific database tables.
-
-### Where are backups stored?
-
-In a hidden `.bkps` directory in your WordPress root. You may need to enable "Show hidden files" in your FTP client to see it. Backups are protected with .htaccess and index.php files.
-
-### Do I need technical knowledge to use this plugin?
-
-No! The plugin is designed for WordPress users of all skill levels. Click "Create" to backup, click "Restore" to recover - it's that simple. Advanced options are available for power users but not required.
-
-### Do you offer additional support or customization?
-
-Yes, feel free to send your request via the [**Backup Copilot**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) website.
-
-== SCREENSHOTS ==
-
-Below are screenshots showing how to access and use the plugin in WordPress.
+== Screenshots ==
 
 1. screenshot-1.(png)
 2. screenshot-2.(png)
@@ -180,161 +128,78 @@ Below are screenshots showing how to access and use the plugin in WordPress.
 5. screenshot-5.(png)
 6. screenshot-6.(png)
 
-== INSTALLATION ==
-
-Installing the plugin is straightforward. Contact support if you encounter any issues.
-
-= Installation from WordPress =
-
-1. Go to **Plugins > Add New**.
-2. Search for **Backup Copilot**.
-3. Install and activate the plugin.
-4. Click **Manage Backups** or go to **Backup Copilot** in the menu.
-
-= Manual Installation =
-
-1. Upload the `backup-copilot` folder to `/wp-content/plugins/`.
-2. Go to **Plugins**.
-3. Activate the **Backup Copilot** plugin.
-4. Click **Manage Backups** or navigate to **Backup Copilot** in the menu.
-
-= After Activation =
-
-1. Navigate to **Backup Copilot** in the admin menu.
-2. Verify all system checks show **[OK]** status.
-3. Create your first backup using the **Create** button.
-4. Add optional notes to identify this backup point.
-5. Review the backup in the "All Backups" section.
-
-== CHANGELOG ==
+== Changelog ==
 
 = 1.1.2 =
 
-**Critical Hotfix - Restore Process**
-
-- **Fixed** - Reverted incorrect multisite path logic that broke restore process in free plugin
-- **Fixed** - Removed PRO-only full backup detection code from FREE plugin restore
-- **Fixed** - Restore now works correctly for all backup types (database + files)
+* Fix - Reverted incorrect multisite path logic
+* Fix - Removed PRO-only detection code
+* Fix - Restore now works correctly for all types
 
 = 1.1.1 =
 
-**Multisite Enhancements & Critical Fixes**
-
-- **New** - Network Admin menu with multisite dashicon for WordPress Multisite installations
-- **New** - Site column in backup table showing which site each backup belongs to (main site only)
-- **New** - Read-only mode for main site viewing subsite backups (view-only access)
-- **New** - Backward compatibility for existing backups with automatic migration
-- **New** - Centralized multisite metadata storage in main site options table
-
-- **Improved** - Multisite backup filtering now properly isolates backups per site
-- **Improved** - Backup sorting now shows newest backups first in the table
-- **Improved** - Delete All button now respects site isolation (only deletes own site's backups)
-- **Improved** - Upload process now auto-extracts SQL files from ZIP archives
-- **Improved** - Restore process handles content-only backups gracefully (skips missing SQL)
-- **Improved** - Site column header alignment matches data cells in backup table
-
-- **Fixed** - Main site can now view all subsites' backups (previously only showed own)
-- **Fixed** - Subsite backups now properly filtered and isolated from other sites
-- **Fixed** - Delete All no longer deletes other sites' backups in multisite
-- **Fixed** - Uploaded {uuid}.zip files now restore correctly with SQL extraction
-- **Fixed** - Restore failure when uploading backups without database files
-- **Fixed** - Action buttons (restore/download/delete) now disabled for other sites' backups
-- **Fixed** - Blog ID storage using prefixed option names to avoid UUID collisions
-
-- **Security** - Read-only access prevents main site from modifying subsite backups
-- **Security** - Proper capability checks (manage_network) for network admin access
-- **Security** - Path validation and nonce verification on all multisite operations
-
-- **Developer** - New method: `BKPC_Multisite::get_mu_option()` for reading blog IDs
-- **Developer** - Enhanced `add_mu_option()` uses `switch_to_blog()` for centralized storage
-- **Developer** - Updated `delete_mu_option()` handles both old and new option formats
-- **Developer** - Smart SQL extraction in upload process checks ZIP contents
-- **Developer** - Conditional database restore based on file existence
+* New - Network Admin menu for Multisite
+* New - Site column in table showing origin
+* New - Read-only mode for main site viewing subsites
+* New - Backward compatibility with automatic migration
+* Update - Improved Multisite filtering
+* Update - Sorting shows newest first
+* Fix - Main site can view all subsites
+* Fix - Subsite isolation properly filtered
+* Fix - Delete All respects site boundaries
+* Fix - Uploaded files restore correctly
+* Fix - Restore failure when missing database files
 
 = 1.1.0 =
 
-**Major Release - Complete Rebuild with Enhanced Features**
-
-- **New** - Real-time progress tracking with toast notifications during backup operations
-- **New** - Secure download handler with nonce verification for all backup files
-- **New** - Restore validation system checks backup integrity before restoration
-- **New** - Generate UUID handler for unique backup identification
-- **New** - Progress polling system shows step-by-step backup creation status
-- **New** - Pro features comparison table on settings page
-- **New** - Enhanced settings page with support links and credits
-- **New** - Loading bar visual feedback for all AJAX operations
-- **New** - Toast notification system for success/error messages
-- **New** - Modal system for confirmations and previews
-- **New** - Compact mode toggle to show plugin under Tools menu
-- **New** - Dashboard widget (commented out, ready for activation)
-
-- **Improved** - Complete codebase refactoring following WordPress Coding Standards (WPCS)
-- **Improved** - Modular JavaScript architecture with ES6 modules and webpack
-- **Improved** - SCSS-based styling with variables and component organization
-- **Improved** - All AJAX handlers now use wp_send_json_success/error for consistency
-- **Improved** - Enhanced security with proper nonce verification throughout
-- **Improved** - Better error handling with user-friendly messages
-- **Improved** - Progress tracking now shows each step: directory creation, database save, file archiving
-- **Improved** - File download URLs use secure AJAX handler instead of direct file access
-- **Improved** - Settings reset functionality with confirmation dialog
-- **Improved** - Backup table displays download links for all backup types
-- **Improved** - Build system with Gulp + Webpack for optimized assets
-
-- **Fixed** - Text domain consistency changed from 'wp-media-recovery' to 'backup-copilot'
-- **Fixed** - Progress notice now displays structured data instead of raw text
-- **Fixed** - Download backup URLs no longer show Windows file paths
-- **Fixed** - Create backup AJAX response uses proper WordPress JSON format
-- **Fixed** - Settings reset button now properly registered and functional
-- **Fixed** - File action links (SQL, ZIP, htaccess, wp-config) work on all platforms
-- **Fixed** - Backup validation checks for download-{uuid}.zip files
-- **Fixed** - JavaScript TypeError when parsing AJAX responses
-- **Fixed** - Loading bar classes corrected throughout JavaScript
-- **Fixed** - Nonce parameter consistency (_wpnonce) across all AJAX calls
-
-- **Security** - Added BKPC_Security class with directory protection methods
-- **Security** - All file downloads now go through authenticated AJAX handler
-- **Security** - File path validation ensures downloads only from backup directory
-- **Security** - Nonce verification on all AJAX endpoints
-- **Security** - Capability checks (manage_options) before operations
-
-- **Developer** - New class: BKPC_Progress for file-based progress tracking
-- **Developer** - New class: BKPC_Security for backup directory protection
-- **Developer** - New class: BKPC_Restore_Validator for pre-restore checks
-- **Developer** - Modular JavaScript files: core, timer, progressbar, notifications, modal
-- **Developer** - Modular SCSS files: base/_variables, admin/*, manage-backups/*
-- **Developer** - Gulp tasks for SCSS compilation, JS bundling, image optimization
-- **Developer** - Webpack configuration for ES6 to ES5 transpiling
-- **Developer** - All event classes properly loaded before initialization
-- **Developer** - Namespace consistency: DEVRY\BKPC throughout codebase
+* New - Real-time progress tracking
+* New - Secure download handler with nonce verification
+* New - Validation system checks integrity
+* New - UUID generation for unique identification
+* New - Progress polling shows step-by-step creation
+* New - Pro features comparison table
+* New - Enhanced settings page
+* New - Loading bar visual feedback
+* New - Toast notification system
+* New - Modal system for confirmations
+* New - Compact mode toggle for admin menu
+* Update - Complete codebase refactoring
+* Update - Modular JavaScript interface
+* Update - SCSS-based styling
+* Update - Enhanced security with nonce verification
+* Update - Better error handling
+* Security - Added security class with directory protection
+* Security - Downloads through authenticated AJAX handler
+* Security - File path validation for downloads
+* Security - Nonce verification on all AJAX endpoints
+* Security - Capability checks before operations
 
 = 1.0.0 =
 
-- **New** - Modern modular JavaScript architecture with webpack bundling
-- **New** - SCSS-based styling system with variables and componentization
-- **New** - Display wp-config.php and .htaccess file icons in backup listings
-- **New** - Improved button visibility - show restore/download for any backup type
-- **New** - Fresh UUID generation for each backup prevents overwrites
-- **New** - Enhanced backup creation logic for selective content options
-- **New** - Gulp and webpack build system for asset compilation
+* Initial release
+* One-click creation
+* One-click restore
+* Site migration with export/import
+* Database dumps
+* File system backup
+* Advanced options
+* Management interface
+* Real-time progress tracking
 
-- **Improved** - Complete codebase refactoring following WordPress coding standards
-- **Improved** - Object-oriented architecture with proper namespacing
-- **Improved** - Database backup now uses UUID filenames for consistency
-- **Improved** - Advanced options now work correctly for all combinations
-- **Improved** - ZIP creation logic respects selection accurately
-- **Improved** - File icon display logic includes all backup file types
-- **Improved** - Security enhancements throughout codebase
+== Upgrade Notice ==
 
-- **Fixed** - Themes + plugins only backup now creates proper ZIP files
-- **Fixed** - Media/uploads backup now includes files correctly
-- **Fixed** - UUID reuse causing backup overwrites
-- **Fixed** - Button visibility logic changed from AND to OR for file checks
-- **Fixed** - SQL filename now uses UUID instead of database name
-- **Fixed** - Multisite backup file checking logic
-- **Fixed** - Orphaned file display from root .bkps directory
+= 1.1.2 =
 
-**Check out the complete changelog on our [**Backup Copilot**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) website.**
+Critical hotfix for restore process. Recommended immediate upgrade for all users.
 
-== UPGRADE NOTICE ==
+= 1.1.1 =
 
-Upgrade to [**Backup Copilot Pro**](https://backupcopilotplugin.com/?utm_source=bkpc&utm_medium=free_plugin&utm_campaign=readme_txt) for cloud storage, automated scheduling, email notifications, and priority support!
+Major Multisite enhancements with improved isolation, subsite support, and critical restore fixes. Highly recommended upgrade.
+
+= 1.1.0 =
+
+Major release with complete rebuild, real-time progress tracking, enhanced security, and improved user interface. Recommended upgrade for all users.
+
+= 1.0.0 =
+
+Initial release with simple, reliable snapshot and restore functionality.
