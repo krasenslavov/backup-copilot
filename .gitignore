@@ -1,5 +1,7 @@
 # Node.js
 node_modules/
+package-lock.json
+package.json
 
 # Output of 'npm pack'
 *.tgz
@@ -47,6 +49,7 @@ Desktop.ini
 # Webpack
 /dist
 /node_modules
+webpack.config.js
 
 # Log files
 *.log
@@ -58,3 +61,6 @@ Desktop.ini
 .claude/
 CLAUDE.md
 CLAUDE-MAINTENANCE.md
+
+# Development
+gulpfile.js
